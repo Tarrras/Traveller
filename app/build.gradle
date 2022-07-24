@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -82,6 +83,8 @@ dependencies {
     //Hilt
     implementation "com.google.dagger:hilt-android:$rootProject.hiltVersion"
     kapt "com.google.dagger:hilt-compiler:$rootProject.hiltVersion"
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
+
 
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3'
@@ -100,4 +103,12 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test:$rootProject.composeVersion"
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$rootProject.composeVersion"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$rootProject.composeVersion"
+    testImplementation 'junit:junit:4.13.2'
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:30.3.0')
+    implementation 'com.google.firebase:firebase-auth:21.0.6'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.6'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
 }

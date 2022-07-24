@@ -35,6 +35,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:7.0.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
+        classpath 'com.google.gms:google-services:4.3.13'
     }
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
@@ -42,4 +43,8 @@ plugins {
     id 'com.android.library' version '7.3.0-beta05' apply false
     id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
     id 'org.jetbrains.kotlin.kapt' version '1.7.0'
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
