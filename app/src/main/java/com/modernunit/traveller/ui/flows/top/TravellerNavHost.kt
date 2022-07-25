@@ -22,7 +22,7 @@ fun TravellerNavHost(
         modifier = modifier,
     ) {
         splashRoute(navController)
-        loginGraph()
+        loginGraph(navController)
         mainGraph()
     }
 }

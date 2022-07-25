@@ -3,6 +3,9 @@
 
     <style name="Theme.Traveller" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">
+            @drawable/transparent_image
+        </item>
         <item name="android:colorBackground">@color/color_background</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">?attr/isLightTheme</item>
