@@ -2,8 +2,6 @@ package com.modernunit.traveller.ui.flows.login.welcome
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -25,6 +23,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.modernunit.traveller.R
+import com.modernunit.traveller.ui.base.TravellerButton
 import com.modernunit.traveller.ui.theme.TravellerTheme
 
 @Composable
@@ -79,15 +78,13 @@ fun WelcomeScreen(
                 textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.weight(1f))
-            Button(
-                onClick = onClickNext,
-                shape = RoundedCornerShape(30.dp),
+            TravellerButton(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 32.dp)
-            ) {
-                Text(text = stringResource(id = R.string.lets_start))
-            }
+                    .padding(bottom = 32.dp),
+                onClick = onClickNext,
+                text = stringResource(id = R.string.lets_start)
+            )
         }
     }
 }

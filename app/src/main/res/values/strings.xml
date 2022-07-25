@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Traveller</string>
+    <string name="no_connection_text">No internet connection</string>
     <string name="welcome_to">Welcome to Traveller\nBook easy and cheap hotels only on Traveller</string>
     <string name="lets_start">Let’s Start</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up">Create an account</string>
+    <string name="play_your_trip">Plan your trip</string>
+    <string name="custom_and_fast">Custom and fast planning with a low price</string>
 </resources>

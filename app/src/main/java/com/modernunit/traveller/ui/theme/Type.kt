@@ -27,6 +27,11 @@ val Typography = Typography(
         fontWeight = FontWeight.W500,
         fontSize = 16.sp
     ),
+    h1 = TextStyle(
+        fontFamily = poppinsFamily,
+        fontWeight = FontWeight.W700,
+        fontSize = 30.sp
+    ),
     subtitle1 = TextStyle(
         fontFamily = robotoFamily,
         fontWeight = FontWeight.W400,
