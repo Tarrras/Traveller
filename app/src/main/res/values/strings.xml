@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Traveller</string>
+    <string name="welcome_to">Welcome to Traveller\nBook easy and cheap hotels only on Traveller</string>
+    <string name="lets_start">Let’s Start</string>
 </resources>

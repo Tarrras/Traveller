@@ -49,9 +49,11 @@ fun SplashScreen(
     onNavigateToNewGraph: (Boolean) -> Unit,
 ) {
     var visible by remember { mutableStateOf(false) }
-    if (viewModel.isUserLogged != null) {
-        //todo refactor this
-        LaunchedEffect(Unit) { onNavigateToNewGraph(viewModel.isUserLogged!!) }
+    val dataState by viewModel.isLogged.collectAsState()
+    when (val state = dataState) {
+        is SplashUiState.DataLoaded ->
+            LaunchedEffect(Unit) { onNavigateToNewGraph(state.isLogged) }
+        else -> Unit
     }
 
 

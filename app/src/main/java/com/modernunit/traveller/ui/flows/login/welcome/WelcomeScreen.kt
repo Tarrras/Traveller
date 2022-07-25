@@ -1,27 +1,43 @@
 package com.modernunit.traveller.ui.flows.login.welcome
 
-import android.util.Log
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.modernunit.traveller.R
+import com.modernunit.traveller.ui.theme.TravellerTheme
 
 @Composable
-fun WelcomeScreen(modifier: Modifier = Modifier) = Box(
+fun WelcomeScreen(
+    modifier: Modifier = Modifier,
+    onClickNext: () -> Unit
+) = Box(
     modifier = modifier
         .fillMaxSize()
 ) {
-    Log.d("TAG", "Welcome fragment!")
+    val composition by rememberLottieComposition(
+        LottieCompositionSpec.RawRes(R.raw.location_loader_anim)
+    )
     Image(
         modifier = Modifier.fillMaxSize(),
         painter = painterResource(id = R.drawable.start_image),
@@ -29,14 +45,57 @@ fun WelcomeScreen(modifier: Modifier = Modifier) = Box(
         contentScale = ContentScale.Crop
     )
     Column(
-        modifier = Modifier.align(Alignment.Center),
+        modifier = Modifier
+            .navigationBarsPadding()
+            .padding(WindowInsets.statusBars.asPaddingValues())
+            .padding(horizontal = 32.dp)
+            .align(Alignment.Center)
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            "Android",
-        )
-        Button(onClick = { /*TODO*/ }, shape = RoundedCornerShape(30.dp)) {
-            Text(text = "Button")
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.weight(1f, true),
+            verticalArrangement = Arrangement.Center
+        ) {
+            LottieAnimation(
+                composition = composition,
+                iterations = LottieConstants.IterateForever,
+                modifier = Modifier
+                    .padding(top = 16.dp)
+                    .size(200.dp)
+            )
+            Text(
+                stringResource(id = R.string.app_name),
+                fontSize = 46.sp,
+                fontWeight = FontWeight.W700,
+                fontFamily = FontFamily.SansSerif
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = stringResource(id = R.string.welcome_to),
+                fontSize = 16.sp,
+                style = MaterialTheme.typography.subtitle1,
+                textAlign = TextAlign.Center
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            Button(
+                onClick = onClickNext,
+                shape = RoundedCornerShape(30.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 32.dp)
+            ) {
+                Text(text = stringResource(id = R.string.lets_start))
+            }
         }
+    }
+}
+
+@Preview(device = "id:Nexus One")
+@Composable
+fun WelcomeScreenPreview() = TravellerTheme {
+    Scaffold {
+        WelcomeScreen(onClickNext = {})
     }
 }
