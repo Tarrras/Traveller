@@ -23,9 +23,9 @@ class TravellerConnectivityManager : ConnectivityManager.NetworkCallback() {
         super.onAvailable(network)
     }
 
-    override fun onUnavailable() {
+    override fun onLost(network: Network) {
         mutableNetworkEvents.tryEmit(NetworkState.UNAVAILABLE)
-        super.onUnavailable()
+        super.onLost(network)
     }
 }
 

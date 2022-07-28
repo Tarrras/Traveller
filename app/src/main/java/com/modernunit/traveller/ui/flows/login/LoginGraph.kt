@@ -5,24 +5,37 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.modernunit.traveller.ui.flows.login.intro.IntroScreen
+import com.modernunit.traveller.ui.flows.login.userSignUp.SignUpScreen
 import com.modernunit.traveller.ui.flows.login.welcome.WelcomeScreen
 import com.modernunit.traveller.ui.flows.top.TopNavDestination
 
 fun NavGraphBuilder.loginGraph(navController: NavHostController) {
     navigation(
-        startDestination = LoginGraphScreenState.WelcomeGraphScreenState.route,
+        startDestination = LoginGraphScreenState.WelcomeGraphScreen.route,
         route = TopNavDestination.LoginGraph.destination
     ) {
-        composable(LoginGraphScreenState.WelcomeGraphScreenState.route) {
+        composable(LoginGraphScreenState.WelcomeGraphScreen.route) {
             WelcomeScreen(onClickNext = {
-                navController.navigate(LoginGraphScreenState.IntroGraphScreenState.route)
+                navController.navigate(LoginGraphScreenState.IntroGraphScreen.route)
             })
         }
-        composable(LoginGraphScreenState.IntroGraphScreenState.route) {
+        composable(LoginGraphScreenState.IntroGraphScreen.route) {
             IntroScreen(onLogIn = {
-                navController.navigate(LoginGraphScreenState.LogInGraphScreenState.route)
+                navController.navigate(LoginGraphScreenState.LogInGraphScreen.route)
             }, onSignUp = {
-                navController.navigate(LoginGraphScreenState.SignUpGraphScreenState.route)
+                navController.navigate(LoginGraphScreenState.SignUpGraphScreen.route)
+            })
+        }
+
+        composable(LoginGraphScreenState.SignUpGraphScreen.route) {
+            SignUpScreen(onGoToLogIn = {
+                navController.navigate(LoginGraphScreenState.LogInGraphScreen.route) {
+                    popUpTo(LoginGraphScreenState.IntroGraphScreen.route)
+                }
+            }, onSuccessfullySignUp = {
+
+            }, onBackPressed = {
+                navController.popBackStack()
             })
         }
     }

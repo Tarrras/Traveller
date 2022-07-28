@@ -94,7 +94,7 @@ fun IntroScreenContent(
         modifier = Modifier
             .fillMaxWidth(),
         onClick = onSignUp,
-        text = stringResource(id = R.string.sign_up),
+        text = stringResource(id = R.string.create_an_account),
         backgroundColor = Color.White, //todo add support for dark theme
         contentColor = Color.Black //todo add support for dark theme
     )
