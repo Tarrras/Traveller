@@ -1,6 +1,8 @@
 package com.modernunit.traveller.ui.base
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
@@ -32,9 +34,11 @@ fun ConnectionLostCard(
     modifier = modifier.padding(top = 20.dp),
     visible = connectionState == NetworkState.UNAVAILABLE,
     enter = slideInVertically(
+        animationSpec = tween(delayMillis = 200, easing = LinearOutSlowInEasing),
         initialOffsetY = { initialOffset -> -initialOffset * 5 }
     ),
     exit = slideOutVertically(
+        animationSpec = tween(delayMillis = 200, easing = LinearOutSlowInEasing),
         targetOffsetY = { targetOffsetY -> -targetOffsetY * 5 }
     )
 ) {
