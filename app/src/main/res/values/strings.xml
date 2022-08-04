@@ -13,8 +13,11 @@
     <string name="log_in">Log In</string>
     <string name="sign_in">Sign In</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="dont_have_an_account_yet">Don’t have an account yet?</string>
+    <string name="forgot_your_password">Forgot your password?</string>
     <string name="sign_up">Sign Up</string>
     <string name="or_sign_up_using">Or sign up using</string>
+    <string name="or_log_in_using">Or log in using</string>
     <string name="lets_start">Let’s Start</string>
     <string name="create_an_account">Create an account</string>
     <string name="play_your_trip">Plan your trip</string>
