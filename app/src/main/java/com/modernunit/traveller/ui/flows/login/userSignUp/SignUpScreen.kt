@@ -3,7 +3,6 @@ package com.modernunit.traveller.ui.flows.login.userSignUp
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -16,14 +15,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.modernunit.traveller.R
+import com.modernunit.traveller.extensions.AnnotatedClickableText
 import com.modernunit.traveller.extensions.EmailValidationResult
 import com.modernunit.traveller.extensions.PasswordValidationResult
 import com.modernunit.traveller.extensions.toValidationTextResult
@@ -59,6 +55,7 @@ fun SignUpScreen(
         modifier = Modifier
             .align(Alignment.TopStart)
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(horizontal = 30.dp),
         email = email,
         password = password,
@@ -92,7 +89,7 @@ fun SignUpScreenContent(
     onBackPressed: () -> Unit,
     onSignUp: () -> Unit,
     onGoToLogIn: () -> Unit,
-) = Column(modifier = modifier.verticalScroll(rememberScrollState())) {
+) = Column(modifier = modifier) {
     Spacer(modifier = Modifier.height(12.dp))
     IconButton(onClick = onBackPressed) {
         Icon(
@@ -139,37 +136,10 @@ fun SignUpScreenContent(
         enabled = isSignUpButtonEnabled
     )
     Spacer(modifier = Modifier.height(32.dp))
-    AnnotatedClickableText(onGoToLogIn = onGoToLogIn, modifier = Modifier.fillMaxWidth())
-    Spacer(modifier = Modifier.height(32.dp))
-}
-
-@Composable
-fun AnnotatedClickableText(
-    modifier: Modifier = Modifier,
-    onGoToLogIn: () -> Unit
-) {
-    val clickableText = stringResource(id = R.string.sign_in)
-    val annotatedText = buildAnnotatedString {
-        append(stringResource(id = R.string.already_have_an_account))
-        append(' ')
-        withStyle(
-            style = SpanStyle(
-                color = MaterialTheme.colors.primary,
-            )
-        ) {
-            append(clickableText)
-        }
-    }
-
-    ClickableText(
-        modifier = modifier,
-        text = annotatedText,
-        style = MaterialTheme.typography.subtitle1.copy(
-            fontSize = 16.sp,
-            textAlign = TextAlign.Center
-        ),
-        onClick = { _ ->
-            onGoToLogIn()
-        }
+    AnnotatedClickableText(
+        onClick = onGoToLogIn, modifier = Modifier.fillMaxWidth(), normalText = stringResource(
+            id = R.string.already_have_an_account
+        ), stringToBeAnnotated = stringResource(id = R.string.sign_in)
     )
+    Spacer(modifier = Modifier.height(32.dp))
 }

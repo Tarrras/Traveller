@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.modernunit.traveller.ui.flows.login.intro.IntroScreen
+import com.modernunit.traveller.ui.flows.login.userLogIn.LoginScreen
 import com.modernunit.traveller.ui.flows.login.userSignUp.SignUpScreen
 import com.modernunit.traveller.ui.flows.login.welcome.WelcomeScreen
 import com.modernunit.traveller.ui.flows.top.TopNavDestination
@@ -33,6 +34,18 @@ fun NavGraphBuilder.loginGraph(navController: NavHostController) {
                     popUpTo(LoginGraphScreenState.IntroGraphScreen.route)
                 }
             }, onSuccessfullySignUp = {
+
+            }, onBackPressed = {
+                navController.popBackStack()
+            })
+        }
+
+        composable(LoginGraphScreenState.LogInGraphScreen.route) {
+            LoginScreen(onGoToSignUp = {
+                navController.navigate(LoginGraphScreenState.SignUpGraphScreen.route) {
+                    popUpTo(LoginGraphScreenState.IntroGraphScreen.route)
+                }
+            }, onSuccessfullyLogIn = {
 
             }, onBackPressed = {
                 navController.popBackStack()
