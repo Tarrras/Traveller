@@ -20,10 +20,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.modernunit.traveller.R
+import com.modernunit.traveller.designSystem.base.ConnectionLostCard
+import com.modernunit.traveller.designSystem.base.TravellerButton
+import com.modernunit.traveller.designSystem.theme.TravellerTheme
 import com.modernunit.traveller.service.NetworkState
-import com.modernunit.traveller.ui.base.ConnectionLostCard
-import com.modernunit.traveller.ui.base.TravellerButton
-import com.modernunit.traveller.ui.theme.TravellerTheme
 
 @Composable
 fun IntroScreen(

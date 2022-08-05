@@ -1,4 +1,4 @@
-package com.modernunit.traveller.extensions
+package com.modernunit.traveller.designSystem.extensions
 
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.MaterialTheme

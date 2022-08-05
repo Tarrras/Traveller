@@ -1,4 +1,4 @@
-package com.modernunit.traveller.extensions
+package com.modernunit.traveller.designSystem.extensions
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.ExperimentalLayoutApi

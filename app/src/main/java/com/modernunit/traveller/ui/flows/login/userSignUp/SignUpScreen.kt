@@ -19,13 +19,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.modernunit.traveller.R
-import com.modernunit.traveller.extensions.AnnotatedClickableText
+import com.modernunit.traveller.designSystem.base.*
+import com.modernunit.traveller.designSystem.extensions.AnnotatedClickableText
+import com.modernunit.traveller.designSystem.theme.TravellerTheme
 import com.modernunit.traveller.extensions.EmailValidationResult
 import com.modernunit.traveller.extensions.PasswordValidationResult
 import com.modernunit.traveller.extensions.toValidationTextResult
 import com.modernunit.traveller.service.NetworkState
-import com.modernunit.traveller.ui.base.*
-import com.modernunit.traveller.ui.theme.TravellerTheme
 
 @Composable
 fun SignUpScreen(

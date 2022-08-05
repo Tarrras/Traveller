@@ -1,4 +1,4 @@
-package com.modernunit.traveller.ui.base
+package com.modernunit.traveller.designSystem.base
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearOutSlowInEasing
@@ -22,8 +22,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.modernunit.traveller.R
+import com.modernunit.traveller.designSystem.theme.TravellerTheme
 import com.modernunit.traveller.service.NetworkState
-import com.modernunit.traveller.ui.theme.TravellerTheme
 
 @Composable
 fun ConnectionLostCard(
