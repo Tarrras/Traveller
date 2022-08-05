@@ -1,4 +1,4 @@
-package com.modernunit.traveller.ui.base
+package com.modernunit.traveller.designSystem.base
 
 import android.content.res.Configuration
 import androidx.compose.animation.animateColorAsState
@@ -32,8 +32,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.modernunit.traveller.R
-import com.modernunit.traveller.extensions.bringIntoViewAfterImeAnimation
-import com.modernunit.traveller.ui.theme.TravellerTheme
+import com.modernunit.traveller.designSystem.extensions.bringIntoViewAfterImeAnimation
+import com.modernunit.traveller.designSystem.theme.TravellerTheme
 
 @Composable
 fun TravellerInputPasswordField(

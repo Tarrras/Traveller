@@ -8,9 +8,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
+import com.modernunit.traveller.designSystem.theme.TravellerTheme
 import com.modernunit.traveller.service.TravellerConnectivityManager
 import com.modernunit.traveller.ui.flows.top.TravellerNavHost
-import com.modernunit.traveller.ui.theme.TravellerTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
