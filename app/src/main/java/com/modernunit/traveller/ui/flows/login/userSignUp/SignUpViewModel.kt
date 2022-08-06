@@ -3,20 +3,20 @@ package com.modernunit.traveller.ui.flows.login.userSignUp
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.modernunit.traveller.coreData.repository.auth.IAuthenticationRepository
 import com.modernunit.traveller.extensions.isValid
 import com.modernunit.traveller.extensions.validateEmail
 import com.modernunit.traveller.extensions.validatePassword
 import com.modernunit.traveller.service.NetworkState
 import com.modernunit.traveller.service.TravellerConnectivityManager
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
-@OptIn(FlowPreview::class)
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
+    private val authenticationRepository: IAuthenticationRepository,
     travellerConnectivityManager: TravellerConnectivityManager
 ) : ViewModel() {
     val connectionState = travellerConnectivityManager.networkEvents
@@ -28,10 +28,13 @@ class SignUpViewModel @Inject constructor(
     private val mutableIsInProgress = MutableStateFlow(false)
     val isInProgress = mutableIsInProgress.asStateFlow()
 
+    private val mutableSignUpState =
+        MutableStateFlow<AuthenticationUserState>(AuthenticationUserState.None)
+    val signUpState = mutableSignUpState.asStateFlow()
+
     val userEmail = savedStateHandle.getStateFlow<String?>("email", null)
     val userEmailValidation = userEmail
         .map { email -> email?.validateEmail() }
-        .debounce(500)
         .stateIn(
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = null,
@@ -41,7 +44,6 @@ class SignUpViewModel @Inject constructor(
     val userPassword = savedStateHandle.getStateFlow<String?>("password", null)
     val userPasswordValidation = userPassword
         .map { password -> password?.validatePassword() }
-        .debounce(500)
         .stateIn(
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = null,
@@ -51,15 +53,38 @@ class SignUpViewModel @Inject constructor(
 
     fun onEmailChanged(email: String) {
         savedStateHandle["email"] = email
+        clearAuthError()
     }
 
     fun onPasswordChanged(password: String) {
         savedStateHandle["password"] = password
+        clearAuthError()
     }
 
-    fun onSignUp() {
-
-    }
+    fun onSignUp() = flow {
+        authenticationRepository.signUp(
+            email = requireNotNull(userEmail.value) {
+                "Email is null!"
+            },
+            password = requireNotNull(userPassword.value) {
+                "Password is null!"
+            }
+        ).let { emit(it) }
+    }.onStart {
+        mutableIsInProgress.value = true
+        mutableSignUpState.value = AuthenticationUserState.None
+    }.catch { cause ->
+        mutableSignUpState.value =
+            AuthenticationUserState.AuthenticationError(cause.localizedMessage ?: "")
+/*        delay(1000)
+        mutableSignUpState.value = AuthenticationUserState.None*/
+    }.onCompletion {
+        mutableIsInProgress.value = false
+    }.onEach { isSignUpSuccessfully ->
+        mutableSignUpState.value = if (isSignUpSuccessfully) {
+            AuthenticationUserState.AuthenticationSuccessfully
+        } else AuthenticationUserState.AuthenticationError("Ooops")
+    }.launchIn(viewModelScope)
 
     val isSignUpButtonEnabled = combine(
         userEmailValidation,
@@ -72,4 +97,16 @@ class SignUpViewModel @Inject constructor(
                 && !isInProgress
                 && isInternetConnectionAvailable
     }
+
+    private fun clearAuthError() {
+        if (mutableSignUpState.value is AuthenticationUserState.AuthenticationError) {
+            mutableSignUpState.value = AuthenticationUserState.None
+        }
+    }
+}
+
+sealed class AuthenticationUserState {
+    data class AuthenticationError(val errorMessage: String) : AuthenticationUserState()
+    object AuthenticationSuccessfully : AuthenticationUserState()
+    object None : AuthenticationUserState()
 }
