@@ -10,7 +10,9 @@ import com.modernunit.traveller.extensions.validatePassword
 import com.modernunit.traveller.service.NetworkState
 import com.modernunit.traveller.service.TravellerConnectivityManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,6 +29,17 @@ class SignUpViewModel @Inject constructor(
 
     private val mutableIsInProgress = MutableStateFlow(false)
     val isInProgress = mutableIsInProgress.asStateFlow()
+
+    private val mutableFeatureIsNotAvailableShown = MutableStateFlow(false)
+    val featureIsNotAvailableShown = mutableFeatureIsNotAvailableShown.asStateFlow()
+
+    fun showFeatureIsNotAvailableMessage() = viewModelScope.launch {
+        if (!mutableFeatureIsNotAvailableShown.value) {
+            mutableFeatureIsNotAvailableShown.value = true
+            delay(3000L)
+            mutableFeatureIsNotAvailableShown.value = false
+        }
+    }
 
     private val mutableSignUpState =
         MutableStateFlow<AuthenticationUserState>(AuthenticationUserState.None)

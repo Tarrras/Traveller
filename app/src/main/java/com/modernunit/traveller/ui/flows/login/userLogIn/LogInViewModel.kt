@@ -11,7 +11,9 @@ import com.modernunit.traveller.service.NetworkState
 import com.modernunit.traveller.service.TravellerConnectivityManager
 import com.modernunit.traveller.ui.flows.login.userSignUp.AuthenticationUserState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,6 +34,17 @@ class LogInViewModel @Inject constructor(
 
     private val mutableIsInProgress = MutableStateFlow(false)
     val isInProgress = mutableIsInProgress.asStateFlow()
+
+    private val mutableFeatureIsNotAvailableShown = MutableStateFlow(false)
+    val featureIsNotAvailableShown = mutableFeatureIsNotAvailableShown.asStateFlow()
+
+    fun showFeatureIsNotAvailableMessage() = viewModelScope.launch {
+        if (!mutableFeatureIsNotAvailableShown.value) {
+            mutableFeatureIsNotAvailableShown.value = true
+            delay(3000L)
+            mutableFeatureIsNotAvailableShown.value = false
+        }
+    }
 
     val userEmail = savedStateHandle.getStateFlow<String?>("email", null)
     val userEmailValidation = userEmail
@@ -86,7 +99,7 @@ class LogInViewModel @Inject constructor(
     }.launchIn(viewModelScope)
 
     fun onForgotPassword() {
-
+        showFeatureIsNotAvailableMessage()
     }
 
     private fun clearAuthError() {
