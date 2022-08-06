@@ -5,11 +5,16 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
@@ -49,7 +54,7 @@ fun LoginScreen(
     val password by viewModel.userPassword.collectAsState()
     val passwordValidationResult by viewModel.userPasswordValidation.collectAsState()
     val isLogInButtonEnabled by viewModel.isLogInButtonEnabled.collectAsState(false)
-
+    val isFeatureIsNotAvailable by viewModel.featureIsNotAvailableShown.collectAsState()
 
     val authState by viewModel.logInState.collectAsState()
     if (authState is AuthenticationUserState.AuthenticationSuccessfully) {
@@ -74,13 +79,21 @@ fun LoginScreen(
         onBackPressed = onBackPressed,
         onLogIn = viewModel::onLogIn,
         onGoToSignUp = onGoToSignUp,
-        onForgotPassword = viewModel::onForgotPassword
+        onForgotPassword = viewModel::onForgotPassword,
+        onFacebookClicked = viewModel::showFeatureIsNotAvailableMessage,
+        onGoogleClicked = viewModel::showFeatureIsNotAvailableMessage
     )
 
     ConnectionLostCard(
         modifier = Modifier
             .align(Alignment.TopCenter),
         connectionState = connectionState,
+    )
+
+    FeatureIsNotAvailableMessage(
+        modifier = Modifier
+            .align(Alignment.BottomCenter),
+        shown = isFeatureIsNotAvailable
     )
 }
 
@@ -100,25 +113,18 @@ fun LogInScreenContent(
     onLogIn: () -> Unit,
     onGoToSignUp: () -> Unit,
     onForgotPassword: () -> Unit,
+    onGoogleClicked: () -> Unit,
+    onFacebookClicked: () -> Unit,
 ) = Column(modifier = modifier) {
     Spacer(modifier = Modifier.height(12.dp))
-    CompositionLocalProvider(
-        LocalMinimumTouchTargetEnforcement provides false,
-    ) {
-        IconButton(onClick = onBackPressed) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_arrow_left),
-                contentDescription = null
-            )
-        }
-    }
+    BackButton(onBackPressed = onBackPressed)
     Spacer(modifier = Modifier.height(16.dp))
     Text(text = stringResource(id = R.string.log_in), style = MaterialTheme.typography.h1)
     Spacer(modifier = Modifier.height(20.dp))
     SocialButtonsGroup(
         modifier = Modifier.fillMaxWidth(),
-        onGoogleClicked = {},
-        onFacebookClicked = {}
+        onGoogleClicked = onGoogleClicked,
+        onFacebookClicked = onFacebookClicked
     )
     Spacer(modifier = Modifier.height(32.dp))
     Text(
@@ -196,7 +202,9 @@ fun LoginScreenPreview() = TravellerTheme {
             onGoToSignUp = {},
             onPasswordChanged = {},
             onForgotPassword = {},
-            authenticationError = null
+            authenticationError = null,
+            onFacebookClicked = {},
+            onGoogleClicked = {}
         )
     }
 }

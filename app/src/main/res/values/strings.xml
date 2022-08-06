@@ -7,6 +7,7 @@
     <string name="invalid_email_error">Invalid email format</string>
     <string name="empty_field_error">Field must not be empty</string>
     <string name="invalid_password_error">Password must contain at least one digit, one lowercase letter, one uppercase letter and be longer than 4</string>
+    <string name="feature_is_not_available">This feature is not available yet :(</string>
 
     <string name="email_field">Email</string>
     <string name="password_field">Password</string>
