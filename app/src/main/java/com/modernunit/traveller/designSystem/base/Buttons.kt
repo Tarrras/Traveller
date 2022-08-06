@@ -4,7 +4,6 @@ import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -58,16 +57,18 @@ fun SocialButton(
         backgroundColor = backgroundColor,
     ),
     shape = RoundedCornerShape(30.dp),
-    contentPadding = PaddingValues(top = 16.dp, bottom = 16.dp, start = 12.dp, end = 16.dp)
+    contentPadding = PaddingValues(top = 16.dp, bottom = 16.dp)
 ) {
+    Spacer(modifier = Modifier.weight(1f))
     Icon(
         painter = logo, contentDescription = text, tint = Color.Unspecified
     )
-    Spacer(modifier = Modifier.width(20.dp))
+    Spacer(modifier = Modifier.weight(1f))
     Text(
         text = text, style = MaterialTheme.typography.h3,
         maxLines = 1, color = textColor
     )
+    Spacer(modifier = Modifier.weight(1f))
 }
 
 @Preview(uiMode = UI_MODE_NIGHT_YES)

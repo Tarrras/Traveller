@@ -6,9 +6,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -21,11 +19,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.modernunit.traveller.R
 import com.modernunit.traveller.designSystem.base.*
 import com.modernunit.traveller.designSystem.extensions.AnnotatedClickableText
+import com.modernunit.traveller.designSystem.extensions.shimmer
 import com.modernunit.traveller.designSystem.theme.TravellerTheme
 import com.modernunit.traveller.extensions.EmailValidationResult
 import com.modernunit.traveller.extensions.PasswordValidationResult
 import com.modernunit.traveller.extensions.toValidationTextResult
 import com.modernunit.traveller.service.NetworkState
+import com.modernunit.traveller.ui.flows.login.userSignUp.AuthenticationUserState
 
 @Composable
 fun LoginScreen(
@@ -50,17 +50,24 @@ fun LoginScreen(
     val passwordValidationResult by viewModel.userPasswordValidation.collectAsState()
     val isLogInButtonEnabled by viewModel.isLogInButtonEnabled.collectAsState(false)
 
-    //todo add shimmer
+
+    val authState by viewModel.logInState.collectAsState()
+    if (authState is AuthenticationUserState.AuthenticationSuccessfully) {
+        LaunchedEffect(Unit) { onSuccessfullyLogIn() }
+    }
+
     LogInScreenContent(
         modifier = Modifier
             .align(Alignment.TopStart)
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 30.dp),
+            .padding(horizontal = 30.dp)
+            .shimmer(isUpdating),
         email = email,
         password = password,
         emailValidationResult = emailValidationResult,
         passwordValidationResult = passwordValidationResult,
+        authenticationError = authState as? AuthenticationUserState.AuthenticationError,
         isLogInButtonEnabled = isLogInButtonEnabled,
         onEmailChanged = viewModel::onEmailChanged,
         onPasswordChanged = viewModel::onPasswordChanged,
@@ -77,6 +84,7 @@ fun LoginScreen(
     )
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun LogInScreenContent(
     modifier: Modifier = Modifier,
@@ -84,6 +92,7 @@ fun LogInScreenContent(
     emailValidationResult: EmailValidationResult?,
     password: String?,
     passwordValidationResult: PasswordValidationResult?,
+    authenticationError: AuthenticationUserState.AuthenticationError?,
     isLogInButtonEnabled: Boolean,
     onEmailChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit,
@@ -93,11 +102,15 @@ fun LogInScreenContent(
     onForgotPassword: () -> Unit,
 ) = Column(modifier = modifier) {
     Spacer(modifier = Modifier.height(12.dp))
-    IconButton(onClick = onBackPressed) {
-        Icon(
-            painter = painterResource(id = R.drawable.ic_arrow_left),
-            contentDescription = null
-        )
+    CompositionLocalProvider(
+        LocalMinimumTouchTargetEnforcement provides false,
+    ) {
+        IconButton(onClick = onBackPressed) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_arrow_left),
+                contentDescription = null
+            )
+        }
     }
     Spacer(modifier = Modifier.height(16.dp))
     Text(text = stringResource(id = R.string.log_in), style = MaterialTheme.typography.h1)
@@ -114,17 +127,26 @@ fun LogInScreenContent(
         textAlign = TextAlign.Center,
         style = MaterialTheme.typography.subtitle1
     )
+    authenticationError?.let {
+        Spacer(modifier = Modifier.height(24.dp))
+        Text(
+            text = it.errorMessage,
+            color = MaterialTheme.colors.error,
+            style = MaterialTheme.typography.subtitle1
+        )
+        Spacer(modifier = Modifier.height(24.dp))
+    } ?: Spacer(modifier = Modifier.height(32.dp))
     TravellerInputTextField(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 32.dp, bottom = 8.dp),
+            .fillMaxWidth(),
         text = email ?: "",
         onValueChanged = onEmailChanged,
         error = emailValidationResult?.toValidationTextResult(),
         placeholderText = stringResource(id = R.string.email_field)
     )
+    Spacer(modifier = Modifier.height(16.dp))
     TravellerInputPasswordField(
-        modifier = Modifier.padding(top = 8.dp),
+        modifier = Modifier.fillMaxWidth(),
         password = password ?: "",
         onPasswordChanged = onPasswordChanged,
         error = passwordValidationResult?.toValidationTextResult()
@@ -157,7 +179,7 @@ fun LogInScreenContent(
     Spacer(modifier = Modifier.height(32.dp))
 }
 
-@Preview
+@Preview(device = "id:Nexus S")
 @Composable
 fun LoginScreenPreview() = TravellerTheme {
     Scaffold {
@@ -173,7 +195,8 @@ fun LoginScreenPreview() = TravellerTheme {
             onEmailChanged = {},
             onGoToSignUp = {},
             onPasswordChanged = {},
-            onForgotPassword = {}
+            onForgotPassword = {},
+            authenticationError = null
         )
     }
 }

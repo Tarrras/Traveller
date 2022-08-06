@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
+import com.valentinilk.shimmer.shimmer
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalFoundationApi::class)
 fun Modifier.bringIntoViewAfterImeAnimation(): Modifier = composed {
@@ -32,4 +33,9 @@ fun Modifier.bringIntoViewAfterImeAnimation(): Modifier = composed {
 
     bringIntoViewRequester(bringIntoViewRequester)
         .onFocusChanged { focusState = it }
+}
+
+fun Modifier.shimmer(isRunning: Boolean) = when (isRunning) {
+    true -> shimmer()
+    false -> this
 }
