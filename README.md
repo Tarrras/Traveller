@@ -4,26 +4,33 @@
 Traveller Android App [Work in progress 🚧]
 ==================
 
-Traveller is a demo Android for travells and hotel reservation (inspired by [this design](https://www.figma.com/file/cgIe4WYf01DECbulxPIGMZ/Travel-App-Design-(Community))).
-This app built entirely with Kotlin and amazing Jetpack Compose. It
-follows Android design and development best practices and is intended to be a portfolio app for me as middle android developer.
+Traveller is a demo Android for travels and hotel reservation (inspired
+by [this design](https://www.figma.com/file/cgIe4WYf01DECbulxPIGMZ/Travel-App-Design-(Community))).
+This app built entirely with Kotlin and amazing Jetpack Compose. It follows Android design and
+development best practices and is intended to be a portfolio app for me as middle android developer.
 
 The app is currently in early stage development and is not yet available on the Play Store.
 
 # Tech stack
 
 This application built with modern Android and Kotlin technologies:
-- Entire UI built with Jetpack Compose (in combination with the [Accompanist library](https://google.github.io/accompanist/))
-- Kotlin Coroutiones for async work
+
+- Entire UI built with Jetpack Compose (in combination with
+  the [Accompanist library](https://google.github.io/accompanist/))
+- Kotlin Coroutines for async work
 - Hilt for dependency injection
 - Navigation built via Jetpack Compose Navigation
 - Clean architecture and MVVM pattern for presentation layer
-- Firebase features ([Firebase Auth](https://firebase.google.com/docs/auth?authuser=0), [Firebase Cloud Firestore](https://firebase.google.com/docs/firestore?authuser=0))
+- Gradle KTS and libs catalog 🔥
+- Firebase features ([Firebase Auth](https://firebase.google.com/docs/auth?authuser=0)
+  , [Firebase Cloud Firestore](https://firebase.google.com/docs/firestore?authuser=0))
 
 Technologies that haven't yet been implemented:
 - Modularization
 - Unit (using Hilt) and UI tests
 - Firebase crashlytics and CI
+- Support of dark theme (for now app support only light theme because I'm lack of colors for dark
+  theme 😔)
 
 # Features
 
