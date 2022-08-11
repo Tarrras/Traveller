@@ -1,6 +1,6 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
+    id("traveller.android.application")
+    id("traveller.android.application.compose")
     id("kotlin-parcelize")
     id("kotlin-kapt")
     id("org.owasp.dependencycheck")
@@ -13,12 +13,9 @@ plugins {
 
 android {
     namespace = "com.modernunit.traveller"
-    compileSdk = 32
 
     defaultConfig {
         applicationId = "com.modernunit.traveller"
-        minSdk = 23
-        targetSdk = 32
         versionCode = 1
         versionName = "1.0"
 
@@ -36,19 +33,6 @@ android {
                 "proguard-rules.pro"
             )
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
     packagingOptions {
         resources {
