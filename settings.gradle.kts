@@ -10,3 +10,4 @@ pluginManagement {
 enableFeaturePreview("VERSION_CATALOGS")
 rootProject.name = "Traveller"
 include(":app")
+include(":core-designsystem")

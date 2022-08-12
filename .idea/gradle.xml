@@ -25,6 +25,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/build-core" />
             <option value="$PROJECT_DIR$/build-core/convention" />
+            <option value="$PROJECT_DIR$/core-designsystem" />
           </set>
         </option>
       </GradleProjectSettings>

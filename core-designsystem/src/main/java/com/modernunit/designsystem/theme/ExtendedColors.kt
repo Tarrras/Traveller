@@ -1,4 +1,4 @@
-package com.modernunit.traveller.designSystem.theme
+package com.modernunit.designsystem.theme
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf

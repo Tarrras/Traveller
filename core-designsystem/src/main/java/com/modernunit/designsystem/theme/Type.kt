@@ -1,4 +1,4 @@
-package com.modernunit.traveller.designSystem.theme
+package com.modernunit.designsystem.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
@@ -6,7 +6,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.modernunit.traveller.R
+import com.modernunit.designsystem.R
 
 // Set of Material typography styles to start with
 val poppinsFamily = FontFamily(

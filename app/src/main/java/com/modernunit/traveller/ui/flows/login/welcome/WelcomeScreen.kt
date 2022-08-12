@@ -22,9 +22,9 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.modernunit.designsystem.base.TravellerButton
+import com.modernunit.designsystem.theme.TravellerTheme
 import com.modernunit.traveller.R
-import com.modernunit.traveller.designSystem.base.TravellerButton
-import com.modernunit.traveller.designSystem.theme.TravellerTheme
 
 @Composable
 fun WelcomeScreen(
