@@ -1,4 +1,4 @@
-package com.modernunit.traveller.designSystem.theme
+package com.modernunit.designsystem.theme
 
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors

@@ -1,4 +1,4 @@
-package com.modernunit.traveller.designSystem.theme
+package com.modernunit.designsystem.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

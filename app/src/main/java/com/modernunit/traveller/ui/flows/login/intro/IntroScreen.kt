@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -19,10 +18,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.accompanist.insets.ui.Scaffold
+import com.modernunit.designsystem.base.ConnectionLostCard
+import com.modernunit.designsystem.base.TravellerButton
+import com.modernunit.designsystem.theme.TravellerTheme
 import com.modernunit.traveller.R
-import com.modernunit.traveller.designSystem.base.ConnectionLostCard
-import com.modernunit.traveller.designSystem.base.TravellerButton
-import com.modernunit.traveller.designSystem.theme.TravellerTheme
 import com.modernunit.traveller.service.NetworkState
 
 @Composable
@@ -50,7 +50,7 @@ fun IntroScreen(
     ConnectionLostCard(
         modifier = Modifier
             .align(Alignment.TopCenter),
-        connectionState = connectionState,
+        isVisible = connectionState == NetworkState.UNAVAILABLE,
     )
 }
 
@@ -122,7 +122,7 @@ fun IntroScreenPreview() = TravellerTheme {
             ConnectionLostCard(
                 modifier = Modifier
                     .align(Alignment.TopCenter),
-                connectionState = NetworkState.UNAVAILABLE,
+                isVisible = true,
             )
         }
     }

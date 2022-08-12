@@ -17,15 +17,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.modernunit.designsystem.base.*
+import com.modernunit.designsystem.extensions.AnnotatedClickableText
+import com.modernunit.designsystem.extensions.shimmer
+import com.modernunit.designsystem.theme.TravellerTheme
 import com.modernunit.traveller.R
-import com.modernunit.traveller.designSystem.base.*
-import com.modernunit.traveller.designSystem.extensions.AnnotatedClickableText
-import com.modernunit.traveller.designSystem.extensions.shimmer
-import com.modernunit.traveller.designSystem.theme.TravellerTheme
 import com.modernunit.traveller.extensions.EmailValidationResult
 import com.modernunit.traveller.extensions.PasswordValidationResult
 import com.modernunit.traveller.extensions.toValidationTextResult
 import com.modernunit.traveller.service.NetworkState
+import com.modernunit.traveller.ui.flows.login.TravellerInputPasswordField
 
 @Composable
 fun SignUpScreen(
@@ -81,7 +82,7 @@ fun SignUpScreen(
     ConnectionLostCard(
         modifier = Modifier
             .align(Alignment.TopCenter),
-        connectionState = connectionState,
+        isVisible = connectionState == NetworkState.UNAVAILABLE,
     )
 
     FeatureIsNotAvailableMessage(

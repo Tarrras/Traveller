@@ -1,4 +1,4 @@
-package com.modernunit.traveller.designSystem.base
+package com.modernunit.designsystem.base
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutLinearInEasing
@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.modernunit.traveller.R
+import com.modernunit.designsystem.R
 
 /**
  * Shows a message that the feature is not available.

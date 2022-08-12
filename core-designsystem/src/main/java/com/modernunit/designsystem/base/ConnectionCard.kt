@@ -1,4 +1,4 @@
-package com.modernunit.traveller.designSystem.base
+package com.modernunit.designsystem.base
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearOutSlowInEasing
@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,18 +20,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.modernunit.traveller.R
-import com.modernunit.traveller.designSystem.theme.TravellerTheme
-import com.modernunit.traveller.service.NetworkState
+import com.modernunit.designsystem.R
+import com.modernunit.designsystem.theme.TravellerTheme
 
 @Composable
 fun ConnectionLostCard(
     modifier: Modifier = Modifier,
-    connectionState: NetworkState?,
+    isVisible: Boolean,
     errorText: String = stringResource(id = R.string.no_connection_text)
 ) = AnimatedVisibility(
     modifier = modifier.padding(top = 20.dp),
-    visible = connectionState == NetworkState.UNAVAILABLE,
+    visible = isVisible,
     enter = slideInVertically(
         animationSpec = tween(delayMillis = 200, easing = LinearOutSlowInEasing),
         initialOffsetY = { initialOffset -> -initialOffset * 5 }
@@ -58,14 +56,12 @@ fun ConnectionLostCard(
 @Preview
 @Composable
 fun ConnectionLostCardPreview() = TravellerTheme {
-    Scaffold {
-        Box(modifier = Modifier.fillMaxSize()) {
-            ConnectionLostCard(
-                modifier = Modifier
-                    .align(Alignment.TopCenter),
-                connectionState = NetworkState.UNAVAILABLE,
-                errorText = "No internet connection"
-            )
-        }
+    Box(modifier = Modifier.fillMaxSize()) {
+        ConnectionLostCard(
+            modifier = Modifier
+                .align(Alignment.TopCenter),
+            isVisible = true,
+            errorText = "No internet connection"
+        )
     }
 }

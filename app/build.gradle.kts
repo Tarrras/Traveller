@@ -42,7 +42,7 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":core-designsystem"))
     implementation(libs.org.jetbrains.kotlin.stdlib.jdk8)
     implementation(libs.org.jetbrains.kotlin.reflect)
     testImplementation(libs.org.jetbrains.kotlin.test.junit)
@@ -53,7 +53,7 @@ dependencies {
     testImplementation(libs.org.jetbrains.kotlinx.coroutines.test)
 
     implementation(libs.androidx.annotation)
-    implementation(libs.androidx.core.ktx)
+    //implementation(libs.androidx.core.ktx)
 
     implementation(libs.androidx.collection.ktx)
 
@@ -106,12 +106,11 @@ dependencies {
     implementation(libs.com.google.firebase.core)
     implementation(libs.com.google.firebase.auth)
 
-    implementation(libs.androidx.compose.runtime)
+    /*implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.foundation.layout)
     implementation(libs.androidx.compose.material)
-    implementation(libs.androidx.compose.runtime.runtime.livedata)
     implementation(libs.androidx.compose.ui.tooling)
     testImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
@@ -121,6 +120,8 @@ dependencies {
     implementation(libs.com.google.accompanist.permissions)
 
     implementation(libs.com.valentinilk.shimmer.compose)
+    */
+
 
     testImplementation(libs.junit)
     testImplementation(libs.androidx.test.core.ktx)

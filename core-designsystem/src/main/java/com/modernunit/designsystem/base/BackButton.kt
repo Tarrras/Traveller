@@ -1,4 +1,4 @@
-package com.modernunit.traveller.designSystem.base
+package com.modernunit.designsystem.base
 
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import com.modernunit.traveller.R
+import com.modernunit.designsystem.R
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

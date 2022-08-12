@@ -1,4 +1,4 @@
-package com.modernunit.traveller.designSystem.base
+package com.modernunit.designsystem.base
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,8 +9,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.modernunit.traveller.R
-import com.modernunit.traveller.designSystem.theme.TravellerTheme
+import com.modernunit.designsystem.R
+import com.modernunit.designsystem.theme.TravellerTheme
 
 @Composable
 fun SocialButtonsGroup(
