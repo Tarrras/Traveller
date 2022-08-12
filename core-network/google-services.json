@@ -1,15 +1,15 @@
 {
   "project_info": {
     "project_number": "419501486043",
-    "project_id": "traveller-276b1",
-    "storage_bucket": "traveller-276b1.appspot.com"
+    "project_id": "network-276b1",
+    "storage_bucket": "network-276b1.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:419501486043:android:4ee25ad2811b0a9175c1fe",
         "android_client_info": {
-          "package_name": "com.modernunit.traveller"
+          "package_name": "com.modernunit.network"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "419501486043-t75ecaf2gcsqbp7p5m3nops37ke09u1g.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.modernunit.traveller",
+            "package_name": "com.modernunit.network",
             "certificate_hash": "ba26f98e9ddd82111068f17855faa41ab12f2fa2"
           }
         },

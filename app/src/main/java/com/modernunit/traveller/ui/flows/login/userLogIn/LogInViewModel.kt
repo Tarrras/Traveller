@@ -3,7 +3,7 @@ package com.modernunit.traveller.ui.flows.login.userLogIn
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.modernunit.traveller.coreData.repository.auth.IAuthenticationRepository
+import com.modernunit.data.auth.IAuthenticationRepository
 import com.modernunit.traveller.extensions.isValid
 import com.modernunit.traveller.extensions.validateEmail
 import com.modernunit.traveller.extensions.validatePassword

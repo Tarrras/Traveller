@@ -2,8 +2,7 @@ package com.modernunit.traveller.ui.flows.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.modernunit.data.auth.IAuthenticationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,16 +11,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SplashViewModel @Inject constructor() : ViewModel() {
-    private val auth = Firebase.auth
-
+class SplashViewModel @Inject constructor(
+    private val authenticationRepository: IAuthenticationRepository,
+) : ViewModel() {
     private val mutableIsLogged = MutableStateFlow<SplashUiState>(SplashUiState.NoData)
     val isLogged = mutableIsLogged.asStateFlow()
 
     fun checkLoggedStatus() {
         viewModelScope.launch {
             delay(2000)
-            mutableIsLogged.value = SplashUiState.DataLoaded(auth.currentUser != null)
+            val isLogged = authenticationRepository.isUserLogged()
+            mutableIsLogged.value = SplashUiState.DataLoaded(isLogged)
         }
     }
 }

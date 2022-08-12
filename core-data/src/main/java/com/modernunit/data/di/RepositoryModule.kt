@@ -1,7 +1,6 @@
-package com.modernunit.traveller.coreData.di
+package com.modernunit.data.di
 
-import com.modernunit.traveller.coreData.repository.auth.AuthenticationRepository
-import com.modernunit.traveller.coreData.repository.auth.IAuthenticationRepository
+import com.modernunit.data.auth.AuthenticationRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,5 +13,5 @@ interface RepositoryModule {
     @Binds
     fun getAuthenticationRepository(
         authenticationRepositoryImpl: AuthenticationRepository
-    ): IAuthenticationRepository
+    ): com.modernunit.data.auth.IAuthenticationRepository
 }

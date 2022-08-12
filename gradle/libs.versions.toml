@@ -1,4 +1,5 @@
 [versions]
+androidx-metrics = "1.0.0-alpha01"
 androidx-activity = "1.5.1"
 androidx-annotation = "1.4.0"
 androidx-appcompat = "1.4.2"
@@ -14,6 +15,7 @@ androidx-core = "1.8.0"
 androidx-datastore = "1.0.0"
 androidx-fragment = "1.5.1"
 androidx-hilt = "1.0.0"
+androidx-work = "2.7.1"
 androidx-lifecycle = "2.5.1"
 androidx-lifecycle-alpha = "2.6.0-alpha01"
 androidx-room = "2.4.3"
@@ -69,6 +71,9 @@ androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constr
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx.fragment" }
+androidx-work-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "androidx.work" }
+androidx-work-gcm = { module = "androidx.work:work-gcm", version.ref = "androidx.work" }
+androidx-work-testing = { module = "androidx.work:work-testing", version.ref = "androidx.work" }
 androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "androidx-hilt" }
 androidx-hilt-worker = { module = "androidx.hilt:hilt-work", version.ref = "androidx-hilt" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidx-hilt" }
@@ -131,5 +136,6 @@ org-jetbrains-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kot
 org-robolectric = { module = "org.robolectric:robolectric", version.ref = "org-robolectric" }
 org-owasp-dependency-check-gradle = { module = "org.owasp:dependency-check-gradle", version.ref = "org-owasp-dependency-check" }
 androidx-customview-poolingcontainer = { module = "androidx.customview:customview-poolingcontainer", version.ref = "androidx-custom-view" }
+androidx-metrics = { module = "androidx.metrics:metrics-performance", version.ref = "androidx-metrics" }
 
 

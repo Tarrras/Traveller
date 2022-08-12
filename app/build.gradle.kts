@@ -43,6 +43,8 @@ android {
 
 dependencies {
     implementation(project(":core-designsystem"))
+    implementation(project(":core-ui"))
+    implementation(project(":core-data"))
     implementation(libs.org.jetbrains.kotlin.stdlib.jdk8)
     implementation(libs.org.jetbrains.kotlin.reflect)
     testImplementation(libs.org.jetbrains.kotlin.test.junit)
@@ -53,7 +55,6 @@ dependencies {
     testImplementation(libs.org.jetbrains.kotlinx.coroutines.test)
 
     implementation(libs.androidx.annotation)
-    //implementation(libs.androidx.core.ktx)
 
     implementation(libs.androidx.collection.ktx)
 
@@ -82,46 +83,15 @@ dependencies {
 
     implementation(libs.androidx.datastore.preferences)
 
-    implementation(libs.androidx.hilt.worker)
 
-    implementation(libs.com.google.code.gson)
-    implementation(libs.org.jetbrains.kotlinx.serialization.json)
-    implementation(libs.org.jetbrains.kotlinx.datetime)
 
     implementation(libs.com.google.hilt)
     implementation(libs.androidx.hilt.navigation.compose)
     kapt(libs.com.google.hilt.compiler)
     kapt(libs.androidx.hilt.compiler)
 
-    implementation(libs.com.squareup.okhttp3.okhttp)
-    implementation(libs.com.squareup.okhttp3.logging.interceptor)
-
-    implementation(libs.com.squareup.retrofit2.retrofit)
-    implementation(libs.com.squareup.retrofit2.converter.gson)
-
-    implementation(libs.com.squareup.curtains)
 
     implementation(libs.com.airbnb.android.lottie.compose)
-
-    implementation(libs.com.google.firebase.core)
-    implementation(libs.com.google.firebase.auth)
-
-    /*implementation(libs.androidx.compose.runtime)
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.foundation.layout)
-    implementation(libs.androidx.compose.material)
-    implementation(libs.androidx.compose.ui.tooling)
-    testImplementation(libs.androidx.compose.ui.test.junit4)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
-
-    implementation(libs.com.google.accompanist.insets.ui)
-    implementation(libs.com.google.accompanist.swiperefresh)
-    implementation(libs.com.google.accompanist.permissions)
-
-    implementation(libs.com.valentinilk.shimmer.compose)
-    */
-
 
     testImplementation(libs.junit)
     testImplementation(libs.androidx.test.core.ktx)
