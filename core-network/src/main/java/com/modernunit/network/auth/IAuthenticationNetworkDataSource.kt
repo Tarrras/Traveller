@@ -1,6 +1,6 @@
-package com.modernunit.traveller.coreData.repository.auth
+package com.modernunit.network.auth
 
-interface IAuthenticationRepository {
+interface IAuthenticationNetworkDataSource {
     suspend fun logIn(
         email: String,
         password: String
@@ -10,4 +10,6 @@ interface IAuthenticationRepository {
         email: String,
         password: String
     ): Boolean
+
+    suspend fun isUserLogged(): Boolean
 }

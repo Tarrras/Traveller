@@ -3,7 +3,7 @@ package com.modernunit.traveller.ui.flows.login.userSignUp
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.modernunit.traveller.coreData.repository.auth.IAuthenticationRepository
+import com.modernunit.data.auth.IAuthenticationRepository
 import com.modernunit.traveller.extensions.isValid
 import com.modernunit.traveller.extensions.validateEmail
 import com.modernunit.traveller.extensions.validatePassword
@@ -89,8 +89,6 @@ class SignUpViewModel @Inject constructor(
     }.catch { cause ->
         mutableSignUpState.value =
             AuthenticationUserState.AuthenticationError(cause.localizedMessage ?: "")
-/*        delay(1000)
-        mutableSignUpState.value = AuthenticationUserState.None*/
     }.onCompletion {
         mutableIsInProgress.value = false
     }.onEach { isSignUpSuccessfully ->

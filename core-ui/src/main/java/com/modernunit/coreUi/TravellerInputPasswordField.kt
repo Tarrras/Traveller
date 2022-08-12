@@ -1,9 +1,22 @@
-package com.modernunit.traveller.ui.flows.login
+package com.modernunit.coreUi
 
-import androidx.compose.runtime.Composable
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import com.modernunit.designsystem.base.TravellerInputTextField
+import com.modernunit.designsystem.theme.TravellerTheme
 
-
+/**
+ * Input field used on the following screens: Sign In, Sign Up
+ */
 @Composable
 fun TravellerInputPasswordField(
     modifier: Modifier = Modifier,
@@ -12,7 +25,7 @@ fun TravellerInputPasswordField(
     error: String? = null,
     enabled: Boolean = true,
 ) {
-/*    var isTextVisible by remember { mutableStateOf(false) }
+    var isTextVisible by remember { mutableStateOf(false) }
     val passwordIconTint by animateColorAsState(
         targetValue = if (isTextVisible) {
             MaterialTheme.colors.primary
@@ -42,5 +55,5 @@ fun TravellerInputPasswordField(
         visualTransformation = visualTransformation,
         keyboardType = KeyboardType.Password,
         placeholderText = stringResource(id = R.string.password_field)
-    )*/
+    )
 }
