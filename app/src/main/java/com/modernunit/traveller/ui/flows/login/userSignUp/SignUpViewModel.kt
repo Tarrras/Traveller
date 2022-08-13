@@ -3,12 +3,12 @@ package com.modernunit.traveller.ui.flows.login.userSignUp
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.modernunit.background.connection.NetworkState
+import com.modernunit.background.connection.TravellerConnectivityManager
+import com.modernunit.common.validator.isValid
+import com.modernunit.common.validator.validateEmail
+import com.modernunit.common.validator.validatePassword
 import com.modernunit.data.auth.IAuthenticationRepository
-import com.modernunit.traveller.extensions.isValid
-import com.modernunit.traveller.extensions.validateEmail
-import com.modernunit.traveller.extensions.validatePassword
-import com.modernunit.traveller.service.NetworkState
-import com.modernunit.traveller.service.TravellerConnectivityManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*

@@ -1,6 +1,6 @@
-package com.modernunit.traveller.di
+package com.modernunit.background.di
 
-import com.modernunit.traveller.service.TravellerConnectivityManager
+import com.modernunit.background.connection.TravellerConnectivityManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object BackgroundModule {
 
     @Singleton
     @Provides

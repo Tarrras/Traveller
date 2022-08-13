@@ -6,7 +6,6 @@ plugins {
     id("org.owasp.dependencycheck")
     id("kotlinx-serialization")
     id("com.google.devtools.ksp")
-    id("com.google.gms.google-services")
     id("com.github.ben-manes.versions")
     id("dagger.hilt.android.plugin")
 }
@@ -45,6 +44,8 @@ dependencies {
     implementation(project(":core-designsystem"))
     implementation(project(":core-ui"))
     implementation(project(":core-data"))
+    implementation(project(":core-common"))
+    implementation(project(":core-background"))
     implementation(libs.org.jetbrains.kotlin.stdlib.jdk8)
     implementation(libs.org.jetbrains.kotlin.reflect)
     testImplementation(libs.org.jetbrains.kotlin.test.junit)

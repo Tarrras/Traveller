@@ -19,11 +19,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.ui.Scaffold
+import com.modernunit.background.connection.NetworkState
 import com.modernunit.designsystem.base.ConnectionLostCard
 import com.modernunit.designsystem.base.TravellerButton
 import com.modernunit.designsystem.theme.TravellerTheme
 import com.modernunit.traveller.R
-import com.modernunit.traveller.service.NetworkState
 
 @Composable
 fun IntroScreen(

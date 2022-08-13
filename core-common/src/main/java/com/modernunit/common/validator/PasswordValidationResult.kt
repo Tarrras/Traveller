@@ -1,9 +1,9 @@
-package com.modernunit.traveller.extensions
+package com.modernunit.common.validator
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.modernunit.traveller.R
+import com.modernunit.common.R
 
 sealed class PasswordValidationResult {
     object Valid : PasswordValidationResult()

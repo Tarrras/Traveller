@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -21,16 +20,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.ui.Scaffold
+import com.modernunit.background.connection.NetworkState
+import com.modernunit.common.validator.EmailValidationResult
+import com.modernunit.common.validator.PasswordValidationResult
+import com.modernunit.common.validator.toValidationTextResult
 import com.modernunit.coreUi.TravellerInputPasswordField
 import com.modernunit.designsystem.base.*
 import com.modernunit.designsystem.extensions.AnnotatedClickableText
 import com.modernunit.designsystem.extensions.shimmer
 import com.modernunit.designsystem.theme.TravellerTheme
 import com.modernunit.traveller.R
-import com.modernunit.traveller.extensions.EmailValidationResult
-import com.modernunit.traveller.extensions.PasswordValidationResult
-import com.modernunit.traveller.extensions.toValidationTextResult
-import com.modernunit.traveller.service.NetworkState
 import com.modernunit.traveller.ui.flows.login.userSignUp.AuthenticationUserState
 
 @Composable
@@ -98,7 +97,6 @@ fun LoginScreen(
     )
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun LogInScreenContent(
     modifier: Modifier = Modifier,

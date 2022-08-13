@@ -25,6 +25,8 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/build-core" />
             <option value="$PROJECT_DIR$/build-core/convention" />
+            <option value="$PROJECT_DIR$/core-background" />
+            <option value="$PROJECT_DIR$/core-common" />
             <option value="$PROJECT_DIR$/core-data" />
             <option value="$PROJECT_DIR$/core-designsystem" />
             <option value="$PROJECT_DIR$/core-network" />

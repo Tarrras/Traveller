@@ -1,4 +1,4 @@
-package com.modernunit.traveller.service
+package com.modernunit.background.connection
 
 import android.net.ConnectivityManager
 import android.net.Network
