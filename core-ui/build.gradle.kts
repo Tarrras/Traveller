@@ -12,6 +12,8 @@ android {
 
 dependencies {
     api(project(":core-designsystem"))
+    implementation(project(":core-testing"))
+
     api(libs.androidx.metrics)
     api(libs.androidx.compose.runtime)
     api(libs.androidx.compose.ui)

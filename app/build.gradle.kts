@@ -46,6 +46,7 @@ dependencies {
     implementation(project(":feature-splash"))
     implementation(project(":core-background"))
     implementation(project(":core-ui"))
+    implementation(project(":core-testing"))
 
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.fragment.ktx)
@@ -89,20 +90,7 @@ dependencies {
     implementation(libs.androidx.room.paging)
     testImplementation(libs.androidx.room.testing)
 
-    implementation(libs.androidx.datastore.preferences)
-
-    testImplementation(libs.junit)
-    testImplementation(libs.androidx.test.core.ktx)
-    testImplementation(libs.androidx.test.ext.junit.ktx)
-    testImplementation(libs.androidx.test.rules)
-    testImplementation(libs.androidx.test.ext.truth)
-    testImplementation(libs.androidx.arch.core.testing)
-
-    testImplementation(libs.org.robolectric)
-
-    androidTestImplementation(libs.androidx.test.runner)
-    androidTestImplementation(libs.androidx.test.ext.junit.ktx)
-    androidTestImplementation(libs.androidx.test.espresso.core)*/
+    implementation(libs.androidx.datastore.preferences)*/
 }
 
 
