@@ -2,7 +2,7 @@ plugins {
     id("traveller.android.application")
     id("traveller.android.application.compose")
     id("kotlin-parcelize")
-    id("kotlin-kapt")
+    kotlin("kapt")
     id("org.owasp.dependencycheck")
     id("kotlinx-serialization")
     id("com.google.devtools.ksp")
@@ -41,14 +41,28 @@ android {
 }
 
 dependencies {
-    implementation(project(":core-designsystem"))
-    implementation(project(":core-ui"))
-    implementation(project(":core-data"))
-    implementation(project(":core-common"))
+    implementation(project(":flow-authentication"))
+    implementation(project(":flow-home"))
+    implementation(project(":feature-splash"))
     implementation(project(":core-background"))
+    implementation(project(":core-ui"))
+
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.navigation.compose)
+
+    implementation(libs.androidx.appcompat)
+    implementation(libs.com.google.android.material)
+
     implementation(libs.org.jetbrains.kotlin.stdlib.jdk8)
     implementation(libs.org.jetbrains.kotlin.reflect)
-    testImplementation(libs.org.jetbrains.kotlin.test.junit)
+
+    implementation(libs.com.google.hilt)
+    implementation(libs.androidx.hilt.navigation.compose)
+    kapt(libs.com.google.hilt.compiler)
+    kapt(libs.androidx.hilt.compiler)
+
+    /*testImplementation(libs.org.jetbrains.kotlin.test.junit)
 
     implementation(libs.org.jetbrains.kotlinx.coroutines.core)
     implementation(libs.org.jetbrains.kotlinx.coroutines.android)
@@ -67,13 +81,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.common)
     implementation(libs.androidx.lifecycle.process)
 
-    implementation(libs.androidx.activity.ktx)
-    implementation(libs.androidx.fragment.ktx)
-
-    implementation(libs.androidx.navigation.compose)
-
-    implementation(libs.androidx.appcompat)
-    implementation(libs.com.google.android.material)
     implementation(libs.androidx.constraintlayout.compose)
 
     ksp(libs.androidx.room.compiler)
@@ -83,16 +90,6 @@ dependencies {
     testImplementation(libs.androidx.room.testing)
 
     implementation(libs.androidx.datastore.preferences)
-
-
-
-    implementation(libs.com.google.hilt)
-    implementation(libs.androidx.hilt.navigation.compose)
-    kapt(libs.com.google.hilt.compiler)
-    kapt(libs.androidx.hilt.compiler)
-
-
-    implementation(libs.com.airbnb.android.lottie.compose)
 
     testImplementation(libs.junit)
     testImplementation(libs.androidx.test.core.ktx)
@@ -105,7 +102,7 @@ dependencies {
 
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.test.ext.junit.ktx)
-    androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.androidx.test.espresso.core)*/
 }
 
 

@@ -31,6 +31,13 @@
             <option value="$PROJECT_DIR$/core-designsystem" />
             <option value="$PROJECT_DIR$/core-network" />
             <option value="$PROJECT_DIR$/core-ui" />
+            <option value="$PROJECT_DIR$/feature-intro" />
+            <option value="$PROJECT_DIR$/feature-login" />
+            <option value="$PROJECT_DIR$/feature-registration" />
+            <option value="$PROJECT_DIR$/feature-splash" />
+            <option value="$PROJECT_DIR$/feature-welcome" />
+            <option value="$PROJECT_DIR$/flow-authentication" />
+            <option value="$PROJECT_DIR$/flow-home" />
           </set>
         </option>
       </GradleProjectSettings>

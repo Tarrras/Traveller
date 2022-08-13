@@ -1,0 +1,7 @@
+<resources>
+    <string name="sign_up">Sign Up</string>
+    <string name="or_sign_up_using">Or sign up using</string>
+    <string name="email_field">Email</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_in">Sign In</string>
+</resources>
