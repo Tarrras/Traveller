@@ -17,16 +17,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.modernunit.background.connection.NetworkState
+import com.modernunit.common.validator.EmailValidationResult
+import com.modernunit.common.validator.PasswordValidationResult
+import com.modernunit.common.validator.toValidationTextResult
 import com.modernunit.coreUi.TravellerInputPasswordField
 import com.modernunit.designsystem.base.*
 import com.modernunit.designsystem.extensions.AnnotatedClickableText
 import com.modernunit.designsystem.extensions.shimmer
 import com.modernunit.designsystem.theme.TravellerTheme
 import com.modernunit.traveller.R
-import com.modernunit.traveller.extensions.EmailValidationResult
-import com.modernunit.traveller.extensions.PasswordValidationResult
-import com.modernunit.traveller.extensions.toValidationTextResult
-import com.modernunit.traveller.service.NetworkState
 
 @Composable
 fun SignUpScreen(

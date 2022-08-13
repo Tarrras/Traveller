@@ -1,7 +1,7 @@
 package com.modernunit.traveller.ui.flows.login.intro
 
 import androidx.lifecycle.ViewModel
-import com.modernunit.traveller.service.TravellerConnectivityManager
+import com.modernunit.background.connection.TravellerConnectivityManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
