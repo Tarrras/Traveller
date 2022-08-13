@@ -11,8 +11,18 @@ android {
 }
 
 dependencies {
-    implementation(project(":core-designsystem"))
-    implementation(libs.androidx.metrics)
+    api(project(":core-designsystem"))
+    api(libs.androidx.metrics)
+    api(libs.androidx.compose.runtime)
+    api(libs.androidx.compose.ui)
+    api(libs.androidx.compose.foundation)
+    api(libs.androidx.compose.foundation.layout)
+    api(libs.androidx.compose.material)
+    debugApi(libs.androidx.compose.ui.tooling)
+    api(libs.com.google.accompanist.insets.ui)
+    api(libs.com.google.accompanist.swiperefresh)
+    api(libs.com.google.accompanist.permissions)
+
     testImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
