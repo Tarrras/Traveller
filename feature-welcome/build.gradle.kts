@@ -15,6 +15,8 @@ dependencies {
     implementation(project(":core-ui"))
     implementation(project(":core-data"))
     implementation(project(":core-background"))
+    implementation(project(":core-testing"))
+
     implementation(libs.com.airbnb.android.lottie.compose)
     implementation(libs.org.jetbrains.kotlinx.coroutines.android)
     implementation(libs.com.google.hilt)

@@ -16,6 +16,7 @@ dependencies {
     implementation(project(":core-data"))
     implementation(project(":core-background"))
     implementation(project(":core-common"))
+    implementation(project(":core-testing"))
     implementation(libs.org.jetbrains.kotlinx.coroutines.android)
     implementation(libs.com.google.hilt)
     kapt(libs.com.google.hilt.compiler)
