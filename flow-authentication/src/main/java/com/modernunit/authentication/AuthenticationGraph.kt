@@ -4,10 +4,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import com.modernunit.featureLogin.LoginScreen
-import com.modernunit.featureRegistration.SignUpScreen
-import com.modernunit.featureWelcome.WelcomeScreen
-import com.modernunit.intro.IntroScreen
+import com.modernunit.authentication.intro.IntroScreen
+import com.modernunit.authentication.login.LoginScreen
+import com.modernunit.authentication.registration.SignUpScreen
+import com.modernunit.authentication.welcome.WelcomeScreen
 
 fun NavGraphBuilder.authenticationGraph(navController: NavHostController, route: String) {
     navigation(
