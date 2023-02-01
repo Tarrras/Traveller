@@ -13,6 +13,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core-testing"))
+
     implementation(libs.org.jetbrains.kotlinx.coroutines.core)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui)

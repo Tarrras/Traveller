@@ -26,13 +26,14 @@ dependencies {
     api(libs.androidx.room.testing)
 
     api(libs.junit)
+    api(libs.turbine)
     api(libs.androidx.test.core.ktx)
     api(libs.androidx.test.ext.junit.ktx)
     api(libs.androidx.test.rules)
     api(libs.androidx.test.ext.truth)
     testApi(libs.androidx.arch.core.testing)
 
-    testApi(libs.org.robolectric)
+    api(libs.org.robolectric)
 
     androidTestApi(libs.androidx.test.runner)
     androidTestApi(libs.androidx.test.ext.junit.ktx)

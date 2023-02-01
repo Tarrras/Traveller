@@ -49,7 +49,7 @@ org-robolectric = "4.8.1"
 com-google-dagger = "2.43.2"
 androidx-navigation = "2.5.1"
 org-owasp-dependency-check = "7.1.1"
-
+turbine = "0.8.0"
 
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidx.activity" }
@@ -98,6 +98,7 @@ androidx-test-ext-junit-ktx = { module = "androidx.test.ext:junit-ktx", version.
 androidx-test-ext-truth = { module = "androidx.test.ext:truth", version.ref = "androidx-test-ext-truth" }
 androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidx-test-rules" }
 androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test-runner" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 com-airbnb-android-lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "com-airbnb-android-lottie" }
 com-android-tools-build-gradle = { module = "com.android.tools.build:gradle", version.ref = "com-android-tools-build-gradle" }
 com-github-ben-manes-gradle-versions-gradle = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "com-github-ben-manes-gradle-versions-gradle" }
