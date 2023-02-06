@@ -5,6 +5,7 @@ import com.modernunit.authentication.auth.validator.PasswordValidationResult
 import com.modernunit.authentication.auth.validator.isValid
 
 data class AuthenticationScreenState(
+    val mode: AuthenticationMode,
     val emailField: String?,
     val emailValidationResult: EmailValidationResult?,
     val passwordField: String?,
@@ -23,6 +24,7 @@ data class AuthenticationScreenState(
 }
 
 val EmptyAuthenticationScreenState = AuthenticationScreenState(
+    mode = AuthenticationMode.SIGN_IN,
     emailField = null,
     emailValidationResult = null,
     passwordField = null,
@@ -33,3 +35,7 @@ val EmptyAuthenticationScreenState = AuthenticationScreenState(
     errorMessage = null,
     isAuthSuccess = false
 )
+
+enum class AuthenticationMode {
+    SIGN_IN, SIGN_UP
+}

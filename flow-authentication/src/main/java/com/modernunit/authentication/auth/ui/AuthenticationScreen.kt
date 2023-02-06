@@ -1,5 +1,6 @@
-package com.modernunit.authentication.auth.login
+package com.modernunit.authentication.auth.ui
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.ui.Scaffold
 import com.modernunit.authentication.R
+import com.modernunit.authentication.auth.AuthenticationMode
 import com.modernunit.authentication.auth.AuthenticationScreenEvent
 import com.modernunit.authentication.auth.AuthenticationScreenState
 import com.modernunit.authentication.auth.EmptyAuthenticationScreenState
@@ -46,11 +48,10 @@ import com.modernunit.designsystem.extensions.shimmer
 import com.modernunit.designsystem.theme.TravellerTheme
 
 @Composable
-fun LoginScreen(
+fun AuthenticationScreen(
     onBackPressed: () -> Unit,
     onSuccessfullyLogIn: () -> Unit,
-    onGoToSignUp: () -> Unit,
-    viewModel: LogInViewModel = hiltViewModel()
+    viewModel: AuthenticationViewModel = hiltViewModel()
 ) = Box(
     modifier = Modifier
         .fillMaxSize()
@@ -64,7 +65,7 @@ fun LoginScreen(
         LaunchedEffect(Unit) { onSuccessfullyLogIn() }
     }
 
-    LogInScreenContent(
+    AuthenticationScreenContent(
         modifier = Modifier
             .align(Alignment.TopStart)
             .fillMaxSize()
@@ -73,7 +74,6 @@ fun LoginScreen(
         uiState = uiState,
         handleEvent = viewModel::handleEvent,
         onBackPressed = onBackPressed,
-        onGoToSignUp = onGoToSignUp
     )
 
     ConnectionLostCard(
@@ -90,19 +90,21 @@ fun LoginScreen(
 }
 
 @Composable
-fun LogInScreenContent(
+fun AuthenticationScreenContent(
     modifier: Modifier = Modifier,
     uiState: AuthenticationScreenState,
     handleEvent: (AuthenticationScreenEvent) -> Unit,
     onBackPressed: () -> Unit,
-    onGoToSignUp: () -> Unit,
 ) = Column(
     modifier = modifier.shimmer(uiState.isLoading)
 ) {
     Spacer(modifier = Modifier.height(12.dp))
     BackButton(onBackPressed = onBackPressed)
     Spacer(modifier = Modifier.height(16.dp))
-    Text(text = stringResource(id = R.string.log_in), style = MaterialTheme.typography.h1)
+    Text(
+        text = stringResource(id = if (uiState.mode == AuthenticationMode.SIGN_IN) R.string.log_in else R.string.sign_up),
+        style = MaterialTheme.typography.h1
+    )
     Spacer(modifier = Modifier.height(20.dp))
     SocialButtonsGroup(
         modifier = Modifier.fillMaxWidth(),
@@ -111,7 +113,10 @@ fun LogInScreenContent(
     )
     Spacer(modifier = Modifier.height(32.dp))
     Text(
-        text = stringResource(id = R.string.or_log_in_using),
+        text = stringResource(
+            id = if (uiState.mode == AuthenticationMode.SIGN_IN) R.string.or_log_in_using
+            else R.string.or_sign_up_using
+        ),
         modifier = Modifier.fillMaxWidth(),
         textAlign = TextAlign.Center,
         style = MaterialTheme.typography.subtitle1
@@ -141,31 +146,38 @@ fun LogInScreenContent(
         error = uiState.passwordValidationResult?.toValidationTextResult()
     )
     Spacer(modifier = Modifier.height(12.dp))
-    ClickableText(
-        text = AnnotatedString(stringResource(id = R.string.forgot_your_password)),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 12.dp),
-        style = MaterialTheme.typography.subtitle1.copy(textAlign = TextAlign.End),
-        onClick = { _ ->
-            handleEvent(AuthenticationScreenEvent.ForgotPasswordEvent)
-        }
-    )
+    AnimatedVisibility(visible = uiState.mode == AuthenticationMode.SIGN_IN) {
+        ClickableText(
+            text = AnnotatedString(stringResource(id = R.string.forgot_your_password)),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 12.dp),
+            style = MaterialTheme.typography.subtitle1.copy(textAlign = TextAlign.End),
+            onClick = { _ ->
+                handleEvent(AuthenticationScreenEvent.ForgotPasswordEvent)
+            }
+        )
+    }
     Spacer(modifier = Modifier.weight(1f))
     TravellerButton(
         onClick = {
             handleEvent(AuthenticationScreenEvent.Authenticate)
         },
-        text = stringResource(id = R.string.log_in),
+        text = stringResource(id = if (uiState.mode == AuthenticationMode.SIGN_IN) R.string.log_in else R.string.sign_up),
         modifier = Modifier
             .fillMaxWidth(),
         enabled = uiState.isLogInButtonEnabled
     )
     Spacer(modifier = Modifier.height(32.dp))
     AnnotatedClickableText(
-        onClick = onGoToSignUp, modifier = Modifier.fillMaxWidth(), normalText = stringResource(
-            id = R.string.dont_have_an_account_yet
-        ), stringToBeAnnotated = stringResource(id = R.string.sign_up)
+        onClick = {
+            handleEvent(AuthenticationScreenEvent.ChangeModeEvent)
+        },
+        modifier = Modifier.fillMaxWidth(),
+        normalText = stringResource(
+            id = if (uiState.mode == AuthenticationMode.SIGN_IN) R.string.dont_have_an_account_yet else R.string.already_have_an_account
+        ),
+        stringToBeAnnotated = stringResource(id = if (uiState.mode == AuthenticationMode.SIGN_IN) R.string.sign_up else R.string.sign_in)
     )
     Spacer(modifier = Modifier.height(32.dp))
 }
@@ -174,12 +186,11 @@ fun LogInScreenContent(
 @Composable
 fun LoginScreenPreview() = TravellerTheme {
     Scaffold {
-        LogInScreenContent(
+        AuthenticationScreenContent(
             modifier = Modifier.padding(horizontal = 30.dp),
             uiState = EmptyAuthenticationScreenState,
             handleEvent = { },
             onBackPressed = { },
-            onGoToSignUp = { }
         )
     }
 }
