@@ -1,10 +1,11 @@
-package com.modernunit.authentication.auth.login
+package com.modernunit.authentication.auth.ui
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.modernunit.authentication.auth.AuthenticationMode
 import com.modernunit.authentication.auth.AuthenticationScreenEvent
-import com.modernunit.authentication.auth.EmptyAuthenticationScreenState
+import com.modernunit.authentication.auth.AuthenticationScreenState
 import com.modernunit.authentication.auth.validator.validateEmail
 import com.modernunit.authentication.auth.validator.validatePassword
 import com.modernunit.background.connection.NetworkState
@@ -27,37 +28,59 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LogInViewModel @Inject constructor(
+class AuthenticationViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val authenticationRepository: IAuthenticationRepository,
     travellerConnectivityManager: TravellerConnectivityManager
 ) : ViewModel() {
+    private val modeOrdinal: Int = checkNotNull(savedStateHandle["mode"])
+
     private val mutableUiState =
-        MutableStateFlow(EmptyAuthenticationScreenState)
+        MutableStateFlow(
+            AuthenticationScreenState(
+                mode = AuthenticationMode.values()[modeOrdinal],
+                emailField = null,
+                emailValidationResult = null,
+                passwordField = null,
+                passwordValidationResult = null,
+                isFeatureIsNotAvailableMessageShow = false,
+                isLoading = false,
+                isInternetConnectionAvailable = true,
+                errorMessage = null,
+                isAuthSuccess = false
+            )
+        )
     val uiState = mutableUiState.asStateFlow()
 
     fun handleEvent(event: AuthenticationScreenEvent) {
         when (event) {
-            AuthenticationScreenEvent.Authenticate -> onLogIn()
+            AuthenticationScreenEvent.Authenticate -> authenticate()
             is AuthenticationScreenEvent.EmailChangedEvent -> onEmailChanged(event.email)
             is AuthenticationScreenEvent.PasswordChangedEvent -> onPasswordChanged(event.password)
             AuthenticationScreenEvent.ForgotPasswordEvent,
             AuthenticationScreenEvent.AuthenticateWithFacebook,
             AuthenticationScreenEvent.AuthenticateWithGoogle -> showFeatureIsNotAvailableMessage()
+
+            AuthenticationScreenEvent.ChangeModeEvent -> mutableUiState.update { state ->
+                when (state.mode) {
+                    AuthenticationMode.SIGN_IN -> AuthenticationMode.SIGN_UP
+                    AuthenticationMode.SIGN_UP -> AuthenticationMode.SIGN_IN
+                }.let { newMode -> state.copy(mode = newMode) }
+            }
         }
     }
 
     val connectionState = flow<Unit> {
         travellerConnectivityManager.networkEvents.collect { event ->
-            mutableUiState.getAndUpdate { it.copy(isInternetConnectionAvailable = event == NetworkState.AVAILABLE) }
+            mutableUiState.update { it.copy(isInternetConnectionAvailable = event == NetworkState.AVAILABLE) }
         }
     }.launchIn(viewModelScope)
 
     private fun showFeatureIsNotAvailableMessage() = viewModelScope.launch {
         if (!mutableUiState.value.isFeatureIsNotAvailableMessageShow) {
-            mutableUiState.getAndUpdate { it.copy(isFeatureIsNotAvailableMessageShow = true) }
+            mutableUiState.update { it.copy(isFeatureIsNotAvailableMessageShow = true) }
             delay(3000L)
-            mutableUiState.getAndUpdate { it.copy(isFeatureIsNotAvailableMessageShow = false) }
+            mutableUiState.update { it.copy(isFeatureIsNotAvailableMessageShow = false) }
         }
     }
 
@@ -84,15 +107,22 @@ class LogInViewModel @Inject constructor(
         clearAuthError()
     }
 
-    private fun onLogIn() = flow {
-        authenticationRepository.logIn(
-            email = requireNotNull(mutableUiState.value.emailField) {
-                "Email is null!"
-            },
-            password = requireNotNull(mutableUiState.value.passwordField) {
-                "Password is null!"
+    private fun authenticate() = flow {
+        val email = requireNotNull(mutableUiState.value.emailField) {
+            "Email is null!"
+        }
+        val password = requireNotNull(mutableUiState.value.passwordField) {
+            "Password is null!"
+        }
+        when (mutableUiState.value.mode) {
+            AuthenticationMode.SIGN_IN -> {
+                authenticationRepository.logIn(email, password)
             }
-        ).let { emit(it) }
+
+            AuthenticationMode.SIGN_UP -> {
+                authenticationRepository.signUp(email, password)
+            }
+        }.let { emit(it) }
     }.onStart {
         mutableUiState.update { it.copy(isLoading = true) }
     }.catch { cause ->
@@ -101,7 +131,7 @@ class LogInViewModel @Inject constructor(
         mutableUiState.update { it.copy(isLoading = false) }
     }.onEach { isSignUpSuccessfully ->
         when (isSignUpSuccessfully) {
-            true -> {}
+            true -> mutableUiState.update { it.copy(isAuthSuccess = isSignUpSuccessfully) }
             else -> mutableUiState.update { it.copy(errorMessage = "Ooops") }
         }
     }.launchIn(viewModelScope)
