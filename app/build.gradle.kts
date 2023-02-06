@@ -53,12 +53,12 @@ android {
 }
 
 dependencies {
-    implementation(project(":flow-authentication"))
-    implementation(project(":flow-home"))
+    implementation(project(":flow:flow-authentication"))
+    implementation(project(":flow:flow-home"))
     implementation(project(":feature-splash"))
-    implementation(project(":core-background"))
-    implementation(project(":core-ui"))
-    implementation(project(":core-testing"))
+    implementation(project(":core:core-background"))
+    implementation(project(":core:core-ui"))
+    implementation(project(":core:core-testing"))
 
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.fragment.ktx)
