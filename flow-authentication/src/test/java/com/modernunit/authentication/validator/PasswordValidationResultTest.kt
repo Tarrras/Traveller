@@ -1,5 +1,7 @@
-package com.modernunit.common.validator
+package com.modernunit.authentication.validator
 
+import com.modernunit.authentication.auth.validator.PasswordValidationResult
+import com.modernunit.authentication.auth.validator.validatePassword
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

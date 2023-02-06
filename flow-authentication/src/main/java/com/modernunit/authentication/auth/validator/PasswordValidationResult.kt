@@ -1,4 +1,4 @@
-package com.modernunit.common.validator
+package com.modernunit.authentication.auth.validator
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource

@@ -1,47 +1,23 @@
-package com.modernunit.authentication.login
+package com.modernunit.authentication.auth.registration
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.modernunit.background.connection.NetworkState
 import com.modernunit.background.connection.TravellerConnectivityManager
-import com.modernunit.common.validator.AuthenticationUserState
-import com.modernunit.common.validator.isValid
-import com.modernunit.common.validator.validateEmail
-import com.modernunit.common.validator.validatePassword
 import com.modernunit.data.auth.IAuthenticationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LogInViewModel @Inject constructor(
+class SignUpViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val authenticationRepository: IAuthenticationRepository,
     travellerConnectivityManager: TravellerConnectivityManager
 ) : ViewModel() {
-    val connectionState = travellerConnectivityManager.networkEvents
+    /*val connectionState = travellerConnectivityManager.networkEvents
 
     private val isInternetConnectionAvailable = connectionState.map {
         it == NetworkState.AVAILABLE
     }
-
-    private val mutableLogInState =
-        MutableStateFlow<AuthenticationUserState>(AuthenticationUserState.None)
-    val logInState = mutableLogInState.asStateFlow()
 
     private val mutableIsInProgress = MutableStateFlow(false)
     val isInProgress = mutableIsInProgress.asStateFlow()
@@ -56,6 +32,10 @@ class LogInViewModel @Inject constructor(
             mutableFeatureIsNotAvailableShown.value = false
         }
     }
+
+    private val mutableSignUpState =
+        MutableStateFlow<AuthenticationScreenState>(AuthenticationScreenState.None)
+    val signUpState = mutableSignUpState.asStateFlow()
 
     val userEmail = savedStateHandle.getStateFlow<String?>("email", null)
     val userEmailValidation = userEmail
@@ -86,8 +66,8 @@ class LogInViewModel @Inject constructor(
         clearAuthError()
     }
 
-    fun onLogIn() = flow {
-        authenticationRepository.logIn(
+    fun onSignUp() = flow {
+        authenticationRepository.signUp(
             email = requireNotNull(userEmail.value) {
                 "Email is null!"
             },
@@ -97,29 +77,19 @@ class LogInViewModel @Inject constructor(
         ).let { emit(it) }
     }.onStart {
         mutableIsInProgress.value = true
-        mutableLogInState.value = AuthenticationUserState.None
+        mutableSignUpState.value = AuthenticationScreenState.None
     }.catch { cause ->
-        mutableLogInState.value =
-            AuthenticationUserState.AuthenticationError(cause.localizedMessage ?: "")
+        mutableSignUpState.value =
+            AuthenticationScreenState.AuthenticationError(cause.localizedMessage ?: "")
     }.onCompletion {
         mutableIsInProgress.value = false
     }.onEach { isSignUpSuccessfully ->
-        mutableLogInState.value = if (isSignUpSuccessfully) {
-            AuthenticationUserState.AuthenticationSuccessfully
-        } else AuthenticationUserState.AuthenticationError("Ooops")
+        mutableSignUpState.value = if (isSignUpSuccessfully) {
+            AuthenticationScreenState.AuthenticationSuccessfully
+        } else AuthenticationScreenState.AuthenticationError("Ooops")
     }.launchIn(viewModelScope)
 
-    fun onForgotPassword() {
-        showFeatureIsNotAvailableMessage()
-    }
-
-    private fun clearAuthError() {
-        if (mutableLogInState.value is AuthenticationUserState.AuthenticationError) {
-            mutableLogInState.value = AuthenticationUserState.None
-        }
-    }
-
-    val isLogInButtonEnabled = combine(
+    val isSignUpButtonEnabled = combine(
         userEmailValidation,
         userPasswordValidation,
         isInProgress,
@@ -130,4 +100,10 @@ class LogInViewModel @Inject constructor(
                 && !isInProgress
                 && isInternetConnectionAvailable
     }
+
+    private fun clearAuthError() {
+        if (mutableSignUpState.value is AuthenticationScreenState.AuthenticationError) {
+            mutableSignUpState.value = AuthenticationScreenState.None
+        }
+    }*/
 }

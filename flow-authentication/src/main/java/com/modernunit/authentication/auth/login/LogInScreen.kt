@@ -1,4 +1,4 @@
-package com.modernunit.authentication.login
+package com.modernunit.authentication.auth.login
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -30,11 +30,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.ui.Scaffold
 import com.modernunit.authentication.R
-import com.modernunit.background.connection.NetworkState
-import com.modernunit.common.validator.AuthenticationUserState
-import com.modernunit.common.validator.EmailValidationResult
-import com.modernunit.common.validator.PasswordValidationResult
-import com.modernunit.common.validator.toValidationTextResult
+import com.modernunit.authentication.auth.AuthenticationScreenEvent
+import com.modernunit.authentication.auth.AuthenticationScreenState
+import com.modernunit.authentication.auth.EmptyAuthenticationScreenState
+import com.modernunit.authentication.auth.validator.toValidationTextResult
 import com.modernunit.coreUi.TravellerInputPasswordField
 import com.modernunit.designsystem.base.BackButton
 import com.modernunit.designsystem.base.ConnectionLostCard
@@ -60,18 +59,8 @@ fun LoginScreen(
         .imePadding()
         .statusBarsPadding(),
 ) {
-    val connectionState by viewModel.connectionState.collectAsState(initial = NetworkState.AVAILABLE)
-    val isUpdating by viewModel.isInProgress.collectAsState()
-
-    val email by viewModel.userEmail.collectAsState()
-    val emailValidationResult by viewModel.userEmailValidation.collectAsState()
-    val password by viewModel.userPassword.collectAsState()
-    val passwordValidationResult by viewModel.userPasswordValidation.collectAsState()
-    val isLogInButtonEnabled by viewModel.isLogInButtonEnabled.collectAsState(false)
-    val isFeatureIsNotAvailable by viewModel.featureIsNotAvailableShown.collectAsState()
-
-    val authState by viewModel.logInState.collectAsState()
-    if (authState is AuthenticationUserState.AuthenticationSuccessfully) {
+    val uiState by viewModel.uiState.collectAsState()
+    if (uiState.isAuthSuccess) {
         LaunchedEffect(Unit) { onSuccessfullyLogIn() }
     }
 
@@ -80,55 +69,36 @@ fun LoginScreen(
             .align(Alignment.TopStart)
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 30.dp)
-            .shimmer(isUpdating),
-        email = email,
-        password = password,
-        emailValidationResult = emailValidationResult,
-        passwordValidationResult = passwordValidationResult,
-        authenticationError = authState as? AuthenticationUserState.AuthenticationError,
-        isLogInButtonEnabled = isLogInButtonEnabled,
-        onEmailChanged = viewModel::onEmailChanged,
-        onPasswordChanged = viewModel::onPasswordChanged,
+            .padding(horizontal = 30.dp),
+        uiState = uiState,
+        handleEvent = viewModel::handleEvent,
         onBackPressed = onBackPressed,
-        onLogIn = viewModel::onLogIn,
-        onGoToSignUp = onGoToSignUp,
-        onForgotPassword = viewModel::onForgotPassword,
-        onFacebookClicked = viewModel::showFeatureIsNotAvailableMessage,
-        onGoogleClicked = viewModel::showFeatureIsNotAvailableMessage
+        onGoToSignUp = onGoToSignUp
     )
 
     ConnectionLostCard(
         modifier = Modifier
             .align(Alignment.TopCenter),
-        isVisible = connectionState == NetworkState.UNAVAILABLE,
+        isVisible = !uiState.isInternetConnectionAvailable,
     )
 
     FeatureIsNotAvailableMessage(
         modifier = Modifier
             .align(Alignment.BottomCenter),
-        shown = isFeatureIsNotAvailable
+        shown = uiState.isFeatureIsNotAvailableMessageShow
     )
 }
 
 @Composable
 fun LogInScreenContent(
     modifier: Modifier = Modifier,
-    email: String?,
-    emailValidationResult: EmailValidationResult?,
-    password: String?,
-    passwordValidationResult: PasswordValidationResult?,
-    authenticationError: AuthenticationUserState.AuthenticationError?,
-    isLogInButtonEnabled: Boolean,
-    onEmailChanged: (String) -> Unit,
-    onPasswordChanged: (String) -> Unit,
+    uiState: AuthenticationScreenState,
+    handleEvent: (AuthenticationScreenEvent) -> Unit,
     onBackPressed: () -> Unit,
-    onLogIn: () -> Unit,
     onGoToSignUp: () -> Unit,
-    onForgotPassword: () -> Unit,
-    onGoogleClicked: () -> Unit,
-    onFacebookClicked: () -> Unit,
-) = Column(modifier = modifier) {
+) = Column(
+    modifier = modifier.shimmer(uiState.isLoading)
+) {
     Spacer(modifier = Modifier.height(12.dp))
     BackButton(onBackPressed = onBackPressed)
     Spacer(modifier = Modifier.height(16.dp))
@@ -136,8 +106,8 @@ fun LogInScreenContent(
     Spacer(modifier = Modifier.height(20.dp))
     SocialButtonsGroup(
         modifier = Modifier.fillMaxWidth(),
-        onGoogleClicked = onGoogleClicked,
-        onFacebookClicked = onFacebookClicked
+        onGoogleClicked = { handleEvent(AuthenticationScreenEvent.AuthenticateWithGoogle) },
+        onFacebookClicked = { handleEvent(AuthenticationScreenEvent.AuthenticateWithFacebook) }
     )
     Spacer(modifier = Modifier.height(32.dp))
     Text(
@@ -146,10 +116,10 @@ fun LogInScreenContent(
         textAlign = TextAlign.Center,
         style = MaterialTheme.typography.subtitle1
     )
-    authenticationError?.let {
+    uiState.errorMessage?.let {
         Spacer(modifier = Modifier.height(24.dp))
         Text(
-            text = it.errorMessage,
+            text = it,
             color = MaterialTheme.colors.error,
             style = MaterialTheme.typography.subtitle1
         )
@@ -158,17 +128,17 @@ fun LogInScreenContent(
     TravellerInputTextField(
         modifier = Modifier
             .fillMaxWidth(),
-        text = email ?: "",
-        onValueChanged = onEmailChanged,
-        error = emailValidationResult?.toValidationTextResult(),
+        text = uiState.emailField ?: "",
+        onValueChanged = { handleEvent(AuthenticationScreenEvent.EmailChangedEvent(it)) },
+        error = uiState.emailValidationResult?.toValidationTextResult(),
         placeholderText = stringResource(id = R.string.email_field)
     )
     Spacer(modifier = Modifier.height(16.dp))
     TravellerInputPasswordField(
         modifier = Modifier.fillMaxWidth(),
-        password = password ?: "",
-        onPasswordChanged = onPasswordChanged,
-        error = passwordValidationResult?.toValidationTextResult()
+        password = uiState.passwordField ?: "",
+        onPasswordChanged = { handleEvent(AuthenticationScreenEvent.PasswordChangedEvent(it)) },
+        error = uiState.passwordValidationResult?.toValidationTextResult()
     )
     Spacer(modifier = Modifier.height(12.dp))
     ClickableText(
@@ -178,16 +148,18 @@ fun LogInScreenContent(
             .padding(bottom = 12.dp),
         style = MaterialTheme.typography.subtitle1.copy(textAlign = TextAlign.End),
         onClick = { _ ->
-            onForgotPassword()
+            handleEvent(AuthenticationScreenEvent.ForgotPasswordEvent)
         }
     )
     Spacer(modifier = Modifier.weight(1f))
     TravellerButton(
-        onClick = onLogIn,
+        onClick = {
+            handleEvent(AuthenticationScreenEvent.Authenticate)
+        },
         text = stringResource(id = R.string.log_in),
         modifier = Modifier
             .fillMaxWidth(),
-        enabled = isLogInButtonEnabled
+        enabled = uiState.isLogInButtonEnabled
     )
     Spacer(modifier = Modifier.height(32.dp))
     AnnotatedClickableText(
@@ -204,20 +176,10 @@ fun LoginScreenPreview() = TravellerTheme {
     Scaffold {
         LogInScreenContent(
             modifier = Modifier.padding(horizontal = 30.dp),
-            email = "email",
-            password = "123",
-            emailValidationResult = EmailValidationResult.Valid,
-            passwordValidationResult = PasswordValidationResult.Valid,
-            isLogInButtonEnabled = true,
-            onLogIn = {},
-            onBackPressed = {},
-            onEmailChanged = {},
-            onGoToSignUp = {},
-            onPasswordChanged = {},
-            onForgotPassword = {},
-            authenticationError = null,
-            onFacebookClicked = {},
-            onGoogleClicked = {}
+            uiState = EmptyAuthenticationScreenState,
+            handleEvent = { },
+            onBackPressed = { },
+            onGoToSignUp = { }
         )
     }
 }
