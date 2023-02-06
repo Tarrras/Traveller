@@ -1,45 +1,14 @@
-package com.modernunit.authentication.registration
+package com.modernunit.authentication.auth.registration
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.modernunit.authentication.R
-import com.modernunit.background.connection.NetworkState
-import com.modernunit.common.validator.AuthenticationUserState
-import com.modernunit.common.validator.EmailValidationResult
-import com.modernunit.common.validator.PasswordValidationResult
-import com.modernunit.common.validator.toValidationTextResult
-import com.modernunit.coreUi.TravellerInputPasswordField
-import com.modernunit.designsystem.base.BackButton
-import com.modernunit.designsystem.base.ConnectionLostCard
-import com.modernunit.designsystem.base.FeatureIsNotAvailableMessage
-import com.modernunit.designsystem.base.SocialButtonsGroup
-import com.modernunit.designsystem.base.TravellerButton
-import com.modernunit.designsystem.base.TravellerInputTextField
-import com.modernunit.designsystem.extensions.AnnotatedClickableText
-import com.modernunit.designsystem.extensions.shimmer
 import com.modernunit.designsystem.theme.TravellerTheme
 
 @Composable
@@ -56,7 +25,7 @@ fun SignUpScreen(
         .imePadding()
         .statusBarsPadding(),
 ) {
-    val connectionState by viewModel.connectionState.collectAsState(initial = NetworkState.AVAILABLE)
+    /*val connectionState by viewModel.connectionState.collectAsState(initial = NetworkState.AVAILABLE)
     val isUpdating by viewModel.isInProgress.collectAsState()
 
     val email by viewModel.userEmail.collectAsState()
@@ -66,12 +35,12 @@ fun SignUpScreen(
     val isSignUpButtonEnabled by viewModel.isSignUpButtonEnabled.collectAsState(false)
     val isFeatureIsNotAvailable by viewModel.featureIsNotAvailableShown.collectAsState()
 
-    val authState by viewModel.signUpState.collectAsState()
-    if (authState is AuthenticationUserState.AuthenticationSuccessfully) {
+    val authState by viewModel.signUpState.collectAsState()*/
+    /*if (authState is AuthenticationScreenState.AuthenticationSuccessfully) {
         LaunchedEffect(Unit) { onSuccessfullySignUp() }
-    }
+    }*/
 
-    SignUpScreenContent(
+    /*SignUpScreenContent(
         modifier = Modifier
             .align(Alignment.TopStart)
             .fillMaxSize()
@@ -82,7 +51,7 @@ fun SignUpScreen(
         password = password,
         emailValidationResult = emailValidationResult,
         passwordValidationResult = passwordValidationResult,
-        authenticationError = authState as? AuthenticationUserState.AuthenticationError,
+        authenticationError = authState as? AuthenticationScreenState.AuthenticationError,
         isSignUpButtonEnabled = isSignUpButtonEnabled,
         onEmailChanged = viewModel::onEmailChanged,
         onPasswordChanged = viewModel::onPasswordChanged,
@@ -91,9 +60,9 @@ fun SignUpScreen(
         onGoToLogIn = onGoToLogIn,
         onFacebookClicked = viewModel::showFeatureIsNotAvailableMessage,
         onGoogleClicked = viewModel::showFeatureIsNotAvailableMessage
-    )
+    )*/
 
-    ConnectionLostCard(
+    /*ConnectionLostCard(
         modifier = Modifier
             .align(Alignment.TopCenter),
         isVisible = connectionState == NetworkState.UNAVAILABLE,
@@ -103,9 +72,10 @@ fun SignUpScreen(
         modifier = Modifier
             .align(Alignment.BottomCenter),
         shown = isFeatureIsNotAvailable
-    )
+    )*/
 }
 
+/*
 @Composable
 fun SignUpScreenContent(
     modifier: Modifier = Modifier,
@@ -113,7 +83,7 @@ fun SignUpScreenContent(
     emailValidationResult: EmailValidationResult?,
     password: String?,
     passwordValidationResult: PasswordValidationResult?,
-    authenticationError: AuthenticationUserState.AuthenticationError?,
+    authenticationError: AuthenticationScreenState.AuthenticationError?,
     isSignUpButtonEnabled: Boolean,
     onEmailChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit,
@@ -181,4 +151,4 @@ fun SignUpScreenContent(
         ), stringToBeAnnotated = stringResource(id = R.string.sign_in)
     )
     Spacer(modifier = Modifier.height(32.dp))
-}
+}*/
