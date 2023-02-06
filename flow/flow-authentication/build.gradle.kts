@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.modernunit.featureSplash"
+    namespace = "com.modernunit.authentication"
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -14,8 +14,9 @@ android {
 dependencies {
     implementation(project(":core:core-ui"))
     implementation(project(":core:core-data"))
+    implementation(project(":core:core-background"))
     implementation(project(":core:core-testing"))
-
+    implementation(project(":core:core-common"))
     implementation(libs.org.jetbrains.kotlinx.coroutines.android)
     implementation(libs.com.google.hilt)
     kapt(libs.com.google.hilt.compiler)
@@ -29,4 +30,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.common)
     implementation(libs.androidx.lifecycle.process)
+    implementation(libs.com.airbnb.android.lottie.compose)
+    implementation(libs.androidx.navigation.compose)
 }

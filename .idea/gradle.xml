@@ -26,16 +26,18 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/build-core" />
             <option value="$PROJECT_DIR$/build-core/convention" />
-            <option value="$PROJECT_DIR$/core-background" />
-            <option value="$PROJECT_DIR$/core-common" />
-            <option value="$PROJECT_DIR$/core-data" />
-            <option value="$PROJECT_DIR$/core-designsystem" />
-            <option value="$PROJECT_DIR$/core-network" />
-            <option value="$PROJECT_DIR$/core-testing" />
-            <option value="$PROJECT_DIR$/core-ui" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/core-background" />
+            <option value="$PROJECT_DIR$/core/core-common" />
+            <option value="$PROJECT_DIR$/core/core-data" />
+            <option value="$PROJECT_DIR$/core/core-designsystem" />
+            <option value="$PROJECT_DIR$/core/core-network" />
+            <option value="$PROJECT_DIR$/core/core-testing" />
+            <option value="$PROJECT_DIR$/core/core-ui" />
             <option value="$PROJECT_DIR$/feature-splash" />
-            <option value="$PROJECT_DIR$/flow-authentication" />
-            <option value="$PROJECT_DIR$/flow-home" />
+            <option value="$PROJECT_DIR$/flow" />
+            <option value="$PROJECT_DIR$/flow/flow-authentication" />
+            <option value="$PROJECT_DIR$/flow/flow-home" />
           </set>
         </option>
       </GradleProjectSettings>
