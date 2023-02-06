@@ -42,7 +42,7 @@ class AuthenticationViewModel @Inject constructor(
                 emailField = null,
                 emailValidationResult = null,
                 passwordField = null,
-                passwordValidationResult = null,
+                passwordValidationResult = emptyList(),
                 isFeatureIsNotAvailableMessageShow = false,
                 isLoading = false,
                 isInternetConnectionAvailable = true,
@@ -93,7 +93,8 @@ class AuthenticationViewModel @Inject constructor(
     private val userPasswordValidation = mutableUiState
         .map { state -> state.passwordField?.validatePassword() }
         .onEach {
-            mutableUiState.value = mutableUiState.value.copy(passwordValidationResult = it)
+            mutableUiState.value =
+                mutableUiState.value.copy(passwordValidationResult = it ?: emptyList())
         }.launchIn(viewModelScope)
 
 

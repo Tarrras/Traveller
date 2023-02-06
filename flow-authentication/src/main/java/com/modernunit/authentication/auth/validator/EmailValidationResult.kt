@@ -2,7 +2,7 @@ package com.modernunit.authentication.auth.validator
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.modernunit.common.R
+import com.modernunit.authentication.R
 
 sealed class EmailValidationResult {
     object Valid : EmailValidationResult()
