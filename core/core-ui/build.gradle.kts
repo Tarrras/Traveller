@@ -20,7 +20,7 @@ dependencies {
     api(libs.androidx.compose.foundation)
     api(libs.androidx.compose.foundation.layout)
     api(libs.androidx.compose.material)
-    debugApi(libs.androidx.compose.ui.tooling)
+    api(libs.androidx.compose.ui.tooling)
     api(libs.com.google.accompanist.insets.ui)
     api(libs.com.google.accompanist.swiperefresh)
     api(libs.com.google.accompanist.permissions)
