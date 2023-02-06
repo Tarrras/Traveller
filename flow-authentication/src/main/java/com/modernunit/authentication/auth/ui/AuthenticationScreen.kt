@@ -35,8 +35,8 @@ import com.modernunit.authentication.auth.AuthenticationMode
 import com.modernunit.authentication.auth.AuthenticationScreenEvent
 import com.modernunit.authentication.auth.AuthenticationScreenState
 import com.modernunit.authentication.auth.EmptyAuthenticationScreenState
+import com.modernunit.authentication.auth.TravellerInputPasswordField
 import com.modernunit.authentication.auth.validator.toValidationTextResult
-import com.modernunit.coreUi.TravellerInputPasswordField
 import com.modernunit.designsystem.base.BackButton
 import com.modernunit.designsystem.base.ConnectionLostCard
 import com.modernunit.designsystem.base.FeatureIsNotAvailableMessage
@@ -143,7 +143,9 @@ fun AuthenticationScreenContent(
         modifier = Modifier.fillMaxWidth(),
         password = uiState.passwordField ?: "",
         onPasswordChanged = { handleEvent(AuthenticationScreenEvent.PasswordChangedEvent(it)) },
-        error = uiState.passwordValidationResult?.toValidationTextResult()
+        error = null, //todo update IT!!!!
+        needToShowStrengthMeter = uiState.mode == AuthenticationMode.SIGN_UP,
+        passwordSatisfiedRequirements = uiState.passwordValidationResult
     )
     Spacer(modifier = Modifier.height(12.dp))
     AnimatedVisibility(visible = uiState.mode == AuthenticationMode.SIGN_IN) {
