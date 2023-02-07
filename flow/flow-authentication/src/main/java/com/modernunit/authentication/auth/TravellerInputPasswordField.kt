@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -51,14 +52,18 @@ fun TravellerInputPasswordField(
     }
     Column(modifier = modifier) {
         TravellerInputTextField(
+            modifier = Modifier.testTag(InputPasswordFieldTestTag),
             text = password,
             onValueChanged = onPasswordChanged,
             error = error,
             enabled = enabled,
             trailingIcon = {
-                IconButton(onClick = {
-                    isTextVisible = !isTextVisible
-                }, enabled = password.isNotEmpty()) {
+                IconButton(
+                    modifier = Modifier.testTag(PasswordEyeTestTag),
+                    onClick = {
+                        isTextVisible = !isTextVisible
+                    }, enabled = password.isNotEmpty()
+                ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_password_eye),
                         contentDescription = stringResource(R.string.password_field),
@@ -79,3 +84,6 @@ fun TravellerInputPasswordField(
         }
     }
 }
+
+const val InputPasswordFieldTestTag = "TravellerInputPasswordFieldTestTag"
+const val PasswordEyeTestTag = "PasswordEyeTestTag"

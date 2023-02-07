@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -50,6 +51,7 @@ fun TravellerInputTextField(
     Column(modifier = modifier.animateContentSize()) {
         TravellerTextField(
             modifier = Modifier
+                .testTag(InputFieldTestTag)
                 .bringIntoViewAfterImeAnimation()
                 .fillMaxWidth(),
             value = text,
@@ -194,3 +196,5 @@ private fun TravellerInputTextFieldPreview() = TravellerTheme {
         }
     }
 }
+
+const val InputFieldTestTag = "TravellerInputFieldTestTag"
