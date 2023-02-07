@@ -22,14 +22,18 @@ class PasswordValidationResultTest {
         )
         assertEquals(
             "1231q_".validatePassword(),
-            listOf(PasswordRequirement.NUMBER, PasswordRequirement.ONE_LOWER_CASE)
+            listOf(
+                PasswordRequirement.NUMBER,
+                PasswordRequirement.ONE_LOWER_CASE,
+                PasswordRequirement.FOUR_CHARACTERS
+            )
         )
         assertEquals(
             "wQ1".validatePassword(),
             listOf(
                 PasswordRequirement.NUMBER,
-                PasswordRequirement.ONE_LOWER_CASE,
-                PasswordRequirement.ONE_UPPER_CASE
+                PasswordRequirement.ONE_UPPER_CASE,
+                PasswordRequirement.ONE_LOWER_CASE
             )
         )
     }

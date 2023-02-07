@@ -33,8 +33,6 @@ dependencies {
     api(libs.androidx.test.ext.truth)
     testApi(libs.androidx.arch.core.testing)
 
-    api(libs.org.robolectric)
-
     androidTestApi(libs.androidx.test.runner)
     androidTestApi(libs.androidx.test.ext.junit.ktx)
     androidTestApi(libs.androidx.test.espresso.core)
