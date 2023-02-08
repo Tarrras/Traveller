@@ -26,6 +26,7 @@ import com.modernunit.authentication.auth.passwordStrengthMeter.PasswordStrength
 import com.modernunit.authentication.auth.validator.PasswordRequirement
 import com.modernunit.designsystem.base.TravellerInputTextField
 import com.modernunit.designsystem.theme.TravellerTheme
+import kotlinx.collections.immutable.ImmutableList
 
 /**
  * Input field used on the following screens: Sign In, Sign Up
@@ -35,8 +36,7 @@ fun TravellerInputPasswordField(
     modifier: Modifier = Modifier,
     password: String,
     onPasswordChanged: (String) -> Unit,
-    error: String? = null,
-    passwordSatisfiedRequirements: List<PasswordRequirement>,
+    passwordSatisfiedRequirements: ImmutableList<PasswordRequirement>,
     enabled: Boolean = true,
     needToShowStrengthMeter: Boolean = false
 ) {
@@ -55,7 +55,6 @@ fun TravellerInputPasswordField(
             modifier = Modifier.testTag(InputPasswordFieldTestTag),
             text = password,
             onValueChanged = onPasswordChanged,
-            error = error,
             enabled = enabled,
             trailingIcon = {
                 IconButton(
@@ -75,13 +74,12 @@ fun TravellerInputPasswordField(
             keyboardType = KeyboardType.Password,
             placeholderText = stringResource(id = R.string.password_field)
         )
-        if (needToShowStrengthMeter) {
-            Spacer(modifier = Modifier.height(16.dp))
-            PasswordStrengthMeter(
-                modifier = Modifier.padding(horizontal = 12.dp),
-                passwordSatisfiedRequirements = passwordSatisfiedRequirements
-            )
-        }
+        Spacer(modifier = Modifier.height(16.dp))
+        PasswordStrengthMeter(
+            modifier = Modifier.padding(horizontal = 12.dp),
+            passwordSatisfiedRequirements = passwordSatisfiedRequirements,
+            showMeterProgress = needToShowStrengthMeter
+        )
     }
 }
 

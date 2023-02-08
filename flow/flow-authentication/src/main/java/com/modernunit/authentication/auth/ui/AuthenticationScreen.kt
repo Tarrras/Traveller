@@ -143,7 +143,6 @@ fun AuthenticationScreenContent(
         modifier = Modifier.fillMaxWidth(),
         password = uiState.passwordField ?: "",
         onPasswordChanged = { handleEvent(AuthenticationScreenEvent.PasswordChangedEvent(it)) },
-        error = null, //todo update IT!!!!
         needToShowStrengthMeter = uiState.mode == AuthenticationMode.SIGN_UP,
         passwordSatisfiedRequirements = uiState.passwordValidationResult
     )

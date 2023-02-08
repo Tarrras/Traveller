@@ -22,11 +22,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.modernunit.authentication.R
 import com.modernunit.authentication.auth.validator.PasswordRequirement
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 fun PasswordStrengthMeter(
     modifier: Modifier = Modifier,
-    passwordSatisfiedRequirements: List<PasswordRequirement>
+    passwordSatisfiedRequirements: ImmutableList<PasswordRequirement>,
+    showMeterProgress: Boolean = true,
 ) {
     val strengthState: PasswordStrengthMeterState = remember(passwordSatisfiedRequirements) {
         when {
@@ -39,10 +41,12 @@ fun PasswordStrengthMeter(
     }
 
     Column(horizontalAlignment = Alignment.Start, modifier = modifier) {
-        PasswordStrengthMeterProgress(
-            meterColors = defaultMeterColors(),
-            strengthState = strengthState
-        )
+        if (showMeterProgress) {
+            PasswordStrengthMeterProgress(
+                meterColors = defaultMeterColors(),
+                strengthState = strengthState
+            )
+        }
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = strengthState.getEmojiStatus(),

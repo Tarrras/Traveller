@@ -25,6 +25,8 @@ dependencies {
     api(libs.com.google.accompanist.swiperefresh)
     api(libs.com.google.accompanist.permissions)
 
+    api(libs.org.jetbrains.kotlinx.collections.immutable)
+
     testImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
