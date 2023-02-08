@@ -14,14 +14,14 @@ import javax.inject.Inject
 class SplashViewModel @Inject constructor(
     private val authenticationRepository: IAuthenticationRepository,
 ) : ViewModel() {
-    private val mutableIsLogged = MutableStateFlow<SplashUiState>(SplashUiState.NoData)
-    val isLogged = mutableIsLogged.asStateFlow()
+    private val mutableSplashUiState = MutableStateFlow<SplashUiState>(SplashUiState.NoData)
+    val splashUiState = mutableSplashUiState.asStateFlow()
 
     fun checkLoggedStatus() {
         viewModelScope.launch {
             delay(2000)
             val isLogged = authenticationRepository.isUserLogged()
-            mutableIsLogged.value = SplashUiState.DataLoaded(isLogged)
+            mutableSplashUiState.value = SplashUiState.DataLoaded(isLogged)
         }
     }
 }

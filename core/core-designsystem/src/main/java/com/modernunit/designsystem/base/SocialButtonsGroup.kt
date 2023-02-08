@@ -21,7 +21,9 @@ fun SocialButtonsGroup(
     SocialButton(
         modifier = Modifier.weight(1f),
         text = stringResource(id = R.string.google),
-        logo = painterResource(id = R.drawable.ic_google_logo),
+        logoProvider = {
+            painterResource(id = R.drawable.ic_google_logo)
+        },
         onClick = onGoogleClicked,
         backgroundColor = Color.White,
         textColor = Color.Black
@@ -30,7 +32,9 @@ fun SocialButtonsGroup(
     SocialButton(
         modifier = Modifier.weight(1f),
         text = stringResource(id = R.string.facebook),
-        logo = painterResource(id = R.drawable.ic_facebook_logo),
+        logoProvider = {
+            painterResource(id = R.drawable.ic_facebook_logo)
+        },
         onClick = onFacebookClicked,
         backgroundColor = TravellerTheme.colors.facebookBlue,
         textColor = Color.White

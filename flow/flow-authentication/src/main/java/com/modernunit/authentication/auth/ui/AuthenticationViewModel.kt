@@ -12,6 +12,8 @@ import com.modernunit.background.connection.NetworkState
 import com.modernunit.background.connection.TravellerConnectivityManager
 import com.modernunit.data.auth.IAuthenticationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -42,7 +44,7 @@ class AuthenticationViewModel @Inject constructor(
                 emailField = null,
                 emailValidationResult = null,
                 passwordField = null,
-                passwordValidationResult = emptyList(),
+                passwordValidationResult = persistentListOf(),
                 isFeatureIsNotAvailableMessageShow = false,
                 isLoading = false,
                 isInternetConnectionAvailable = true,
@@ -94,7 +96,9 @@ class AuthenticationViewModel @Inject constructor(
         .map { state -> state.passwordField?.validatePassword() }
         .onEach {
             mutableUiState.value =
-                mutableUiState.value.copy(passwordValidationResult = it ?: emptyList())
+                mutableUiState.value.copy(
+                    passwordValidationResult = it?.toImmutableList() ?: persistentListOf()
+                )
         }.launchIn(viewModelScope)
 
 

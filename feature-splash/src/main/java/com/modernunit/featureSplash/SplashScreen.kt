@@ -17,19 +17,17 @@ import androidx.navigation.compose.composable
 
 fun NavGraphBuilder.splashRoute(navigateToHome: () -> Unit, navigateToAuth: () -> Unit) {
     composable(SplashScreenRoute) {
-        val viewModel = hiltViewModel<SplashViewModel>()
         SplashScreen(
             modifier = Modifier.fillMaxSize(),
-            viewModel = viewModel,
             onNavigateToNewGraph = { isLogged ->
                 Log.d("TAG", "navigateToNestedGraph here!")
                 if (isLogged) navigateToHome() else navigateToAuth()
             }
         )
-        LaunchedEffect(Unit) {
+        /*LaunchedEffect(Unit) {
             Log.d("TAG", "checkLoggedStatus goes here!")
             viewModel.checkLoggedStatus()
-        }
+        }*/
 
     }
 }
@@ -38,17 +36,27 @@ fun NavGraphBuilder.splashRoute(navigateToHome: () -> Unit, navigateToAuth: () -
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
-    viewModel: SplashViewModel,
     onNavigateToNewGraph: (Boolean) -> Unit,
 ) {
+    val viewModel = hiltViewModel<SplashViewModel>()
+
     var visible by remember { mutableStateOf(false) }
-    val dataState by viewModel.isLogged.collectAsState()
-    when (val state = dataState) {
-        is SplashUiState.DataLoaded ->
-            LaunchedEffect(Unit) { onNavigateToNewGraph(state.isLogged) }
-        else -> Unit
+    val uiState by viewModel.splashUiState.collectAsState()
+
+    LaunchedEffect(Unit) {
+        visible = true
+        viewModel.checkLoggedStatus()
     }
 
+    LaunchedEffect(uiState) {
+        when (uiState) {
+            is SplashUiState.DataLoaded -> {
+                onNavigateToNewGraph((uiState as SplashUiState.DataLoaded).isLogged)
+            }
+
+            else -> Unit
+        }
+    }
 
     AnimatedVisibility(
         visible = visible,
@@ -63,11 +71,6 @@ fun SplashScreen(
             contentDescription = null,
             contentScale = ContentScale.Crop
         )
-    }
-
-    LaunchedEffect(Unit) {
-        visible = true
-        viewModel.checkLoggedStatus()
     }
 }
 

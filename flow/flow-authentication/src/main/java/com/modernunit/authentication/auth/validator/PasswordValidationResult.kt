@@ -1,8 +1,10 @@
 package com.modernunit.authentication.auth.validator
 
 import androidx.annotation.StringRes
+import androidx.compose.runtime.Immutable
 import com.modernunit.authentication.R
 
+@Immutable
 enum class PasswordRequirement(
     @StringRes val requirementRes: Int
 ) {

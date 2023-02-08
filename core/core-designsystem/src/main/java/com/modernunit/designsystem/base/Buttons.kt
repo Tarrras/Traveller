@@ -51,7 +51,7 @@ fun TravellerButton(
 fun SocialButton(
     modifier: Modifier = Modifier,
     text: String,
-    logo: Painter,
+    logoProvider: @Composable () -> Painter,
     onClick: () -> Unit,
     backgroundColor: Color = MaterialTheme.colors.primary,
     textColor: Color
@@ -67,7 +67,7 @@ fun SocialButton(
 ) {
     Spacer(modifier = Modifier.weight(1f))
     Icon(
-        painter = logo, contentDescription = text, tint = Color.Unspecified
+        painter = logoProvider(), contentDescription = text, tint = Color.Unspecified
     )
     Spacer(modifier = Modifier.weight(1f))
     Text(
