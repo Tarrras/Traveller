@@ -12,6 +12,7 @@ import com.modernunit.background.connection.NetworkState
 import com.modernunit.background.connection.TravellerConnectivityManager
 import com.modernunit.data.auth.IAuthenticationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.delay
@@ -27,7 +28,6 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class AuthenticationViewModel @Inject constructor(

@@ -1,9 +1,9 @@
 package com.modernunit.data.auth
 
 import com.modernunit.network.auth.IAuthenticationNetworkDataSource
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 class AuthenticationRepository @Inject constructor(
     private val authenticationNetworkDataSource: IAuthenticationNetworkDataSource,

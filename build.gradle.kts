@@ -29,6 +29,7 @@ subprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
     ktlint {
         android.set(true)
+        ignoreFailures.set(false)
         reporters {
             reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
             reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
@@ -47,7 +48,7 @@ allprojects {
                 freeCompilerArgs += listOf(
                     "-P",
                     "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=" +
-                            rootProject.buildDir.absolutePath + "/compose_metrics/"
+                        rootProject.buildDir.absolutePath + "/compose_metrics/"
                 )
             }
         }
