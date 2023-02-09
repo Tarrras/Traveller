@@ -41,12 +41,12 @@ fun NavGraphBuilder.authenticationGraph(navController: NavHostController, route:
         }
 
         composable(
-            AuthenticationGraphScreenState.AuthenticationGraphScreen.route, arguments = listOf(
+            AuthenticationGraphScreenState.AuthenticationGraphScreen.route,
+            arguments = listOf(
                 navArgument("mode") { type = NavType.IntType }
             )
         ) {
             AuthenticationScreen(onSuccessfullyLogIn = {
-
             }, onBackPressed = {
                 navController.popBackStack()
             })

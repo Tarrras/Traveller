@@ -21,10 +21,12 @@ data class AuthenticationScreenState(
     val isAuthSuccess: Boolean,
 ) {
     val isLogInButtonEnabled
-        get() = (emailValidationResult?.isValid == true
-                && passwordValidationResult.isNotEmpty()
-                && !isLoading
-                && isInternetConnectionAvailable)
+        get() = (
+                emailValidationResult?.isValid == true &&
+                        passwordValidationResult.isNotEmpty() &&
+                        !isLoading &&
+                        isInternetConnectionAvailable
+                )
 }
 
 val EmptyAuthenticationScreenState = AuthenticationScreenState(

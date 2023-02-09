@@ -15,13 +15,27 @@ buildscript {
         classpath(libs.com.google.gms.google.services)
         classpath(libs.com.github.ben.manes.gradle.versions.gradle)
         classpath(libs.com.google.hilt.gradle)
+        classpath(libs.org.ktlint.gradle)
     }
-}// Top-level build file where you can add configuration options common to all sub-projects/modules.
+} // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 apply(plugin = "com.github.ben-manes.versions")
 
 plugins {
     id("org.jlleitschuh.gradle.ktlint") version "11.1.0"
+}
+
+subprojects {
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+    ktlint {
+        android.set(true)
+        reporters {
+            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.SARIF)
+        }
+        disabledRules.set(setOf("no-wildcard-imports", "max-line-length"))
+    }
 }
 
 allprojects {
@@ -32,11 +46,8 @@ allprojects {
             if (project.findProperty("enableMultiModuleComposeReports") == "true") {
                 freeCompilerArgs += listOf(
                     "-P",
-                    "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=" + rootProject.buildDir.absolutePath + "/compose_metrics/"
-                )
-                freeCompilerArgs += listOf(
-                    "-P",
-                    "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=" + rootProject.buildDir.absolutePath + "/compose_metrics/"
+                    "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=" +
+                            rootProject.buildDir.absolutePath + "/compose_metrics/"
                 )
             }
         }

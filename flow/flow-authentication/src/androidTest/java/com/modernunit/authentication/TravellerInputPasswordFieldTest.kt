@@ -40,5 +40,4 @@ class TravellerInputPasswordFieldTest {
         composeTestRule.onNodeWithTag(PasswordEyeTestTag).performClick()
         Assert.assertEquals(text, "qwerty")
     }
-
 }

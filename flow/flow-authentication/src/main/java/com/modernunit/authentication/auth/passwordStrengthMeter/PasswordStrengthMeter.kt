@@ -50,7 +50,7 @@ fun PasswordStrengthMeter(
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = strengthState.getEmojiStatus(),
-            color = Color.Gray //todo change
+            color = Color.Gray // todo change
         )
         Spacer(modifier = Modifier.height(8.dp))
         PasswordRequirement.values().forEach { requirement ->
@@ -73,7 +73,7 @@ fun Qualifier(
         .animateContentSize()
 ) {
     val textColor by animateColorAsState(
-        targetValue = if (isSatisfied) Color(0xFF67C85A) else Color.LightGray //todo update
+        targetValue = if (isSatisfied) Color(0xFF67C85A) else Color.LightGray // todo update
     )
 
     Text(text = text, color = textColor)
@@ -85,4 +85,3 @@ fun Qualifier(
         )
     }
 }
-

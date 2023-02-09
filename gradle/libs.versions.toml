@@ -50,6 +50,7 @@ com-google-dagger = "2.43.2"
 androidx-navigation = "2.5.1"
 org-owasp-dependency-check = "7.1.1"
 turbine = "0.8.0"
+org-ktlint-gradle = "11.1.0"
 
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidx.activity" }
@@ -137,6 +138,7 @@ org-jetbrains-kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datet
 org-jetbrains-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "org-jetbrains-kotlinx-serialization-json" }
 org-jetbrains-kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "org-jetbrains-kotlinx-collections-immutable" }
 org-owasp-dependency-check-gradle = { module = "org.owasp:dependency-check-gradle", version.ref = "org-owasp-dependency-check" }
+org-ktlint-gradle = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "org-ktlint-gradle" }
 androidx-customview-poolingcontainer = { module = "androidx.customview:customview-poolingcontainer", version.ref = "androidx-custom-view" }
 androidx-metrics = { module = "androidx.metrics:metrics-performance", version.ref = "androidx-metrics" }
 

@@ -36,5 +36,4 @@ dependencies {
     androidTestApi(libs.androidx.test.runner)
     androidTestApi(libs.androidx.test.ext.junit.ktx)
     androidTestApi(libs.androidx.test.espresso.core)
-
 }

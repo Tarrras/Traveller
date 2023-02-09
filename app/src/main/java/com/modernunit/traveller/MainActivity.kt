@@ -14,7 +14,6 @@ import com.modernunit.traveller.navigation.TravellerNavHost
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
@@ -31,8 +30,14 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         val connectivityManager =
             getSystemService(ConnectivityManager::class.java) as ConnectivityManager
-        connectivityManager.registerNetworkCallback(networkRequest, travellerConnectivityManager)
-            .also { travellerConnectivityManager.setAvailabilityState(connectivityManager.activeNetwork != null) }
+        connectivityManager.registerNetworkCallback(
+            networkRequest,
+            travellerConnectivityManager
+        ).also {
+            travellerConnectivityManager.setAvailabilityState(
+                connectivityManager.activeNetwork != null
+            )
+        }
 
         setContent {
             val navController = rememberNavController()

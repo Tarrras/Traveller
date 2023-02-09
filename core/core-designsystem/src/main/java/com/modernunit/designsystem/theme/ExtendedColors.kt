@@ -19,7 +19,7 @@ val LightExtendedColors by lazy {
     )
 }
 
-//todo update for dark theme
+// todo update for dark theme
 val DarkExtendedColors by lazy {
     ExtendedColors(
         facebookBlue = Color(0xFF3498DB),

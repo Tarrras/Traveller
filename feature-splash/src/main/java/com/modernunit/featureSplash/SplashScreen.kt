@@ -28,7 +28,6 @@ fun NavGraphBuilder.splashRoute(navigateToHome: () -> Unit, navigateToAuth: () -
             Log.d("TAG", "checkLoggedStatus goes here!")
             viewModel.checkLoggedStatus()
         }*/
-
     }
 }
 
