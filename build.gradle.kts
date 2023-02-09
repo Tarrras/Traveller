@@ -20,6 +20,10 @@ buildscript {
 
 apply(plugin = "com.github.ben-manes.versions")
 
+plugins {
+    id("org.jlleitschuh.gradle.ktlint") version "11.1.0"
+}
+
 allprojects {
     tasks.withType(org.jetbrains.kotlin.gradle.dsl.KotlinCompile::class.java).configureEach {
         kotlinOptions {
