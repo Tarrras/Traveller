@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.sp
 import com.modernunit.designsystem.extensions.bringIntoViewAfterImeAnimation
 import com.modernunit.designsystem.theme.TravellerTheme
 
-
 @Composable
 fun TravellerInputTextField(
     modifier: Modifier = Modifier,
@@ -79,8 +78,8 @@ fun TravellerInputTextField(
             ),
             shape = shape,
             colors = TextFieldDefaults.textFieldColors(
-                textColor = Color.Black, //todo add support for dark theme
-                backgroundColor = Color.White //todo add support for dark theme
+                textColor = Color.Black, // todo add support for dark theme
+                backgroundColor = Color.White // todo add support for dark theme
             ),
             textStyle = MaterialTheme.typography.subtitle2
         )

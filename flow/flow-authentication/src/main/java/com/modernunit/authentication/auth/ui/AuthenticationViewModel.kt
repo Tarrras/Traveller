@@ -101,7 +101,6 @@ class AuthenticationViewModel @Inject constructor(
                 )
         }.launchIn(viewModelScope)
 
-
     private fun onEmailChanged(email: String) {
         mutableUiState.value = mutableUiState.value.copy(emailField = email)
         clearAuthError()

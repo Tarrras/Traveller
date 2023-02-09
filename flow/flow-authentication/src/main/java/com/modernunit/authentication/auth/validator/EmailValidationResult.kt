@@ -16,7 +16,6 @@ fun String.validateEmail() = when {
     else -> EmailValidationResult.Valid
 }
 
-
 @Composable
 fun EmailValidationResult.toValidationTextResult() = when (this) {
     is EmailValidationResult.PatternValidationFailed -> stringResource(id = R.string.invalid_email_error)

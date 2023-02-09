@@ -41,7 +41,7 @@ fun IntroScreen(
 ) = Box(
     modifier = Modifier
         .fillMaxSize()
-        .background(Color.White) //todo add support for dark theme
+        .background(Color.White) // todo add support for dark theme
         .navigationBarsPadding()
         .statusBarsPadding(),
 ) {
@@ -103,8 +103,8 @@ fun IntroScreenContent(
             .fillMaxWidth(),
         onClick = onSignUp,
         text = stringResource(id = R.string.create_an_account),
-        backgroundColor = Color.White, //todo add support for dark theme
-        contentColor = Color.Black //todo add support for dark theme
+        backgroundColor = Color.White, // todo add support for dark theme
+        contentColor = Color.Black // todo add support for dark theme
     )
     Spacer(modifier = Modifier.height(32.dp))
 }
@@ -116,7 +116,7 @@ fun IntroScreenPreview() = TravellerTheme {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.White) //todo add support for dark theme
+                .background(Color.White) // todo add support for dark theme
                 .navigationBarsPadding()
                 .statusBarsPadding()
         ) {
@@ -135,4 +135,3 @@ fun IntroScreenPreview() = TravellerTheme {
         }
     }
 }
-

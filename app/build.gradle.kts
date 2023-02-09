@@ -105,7 +105,6 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)*/
 }
 
-
 kapt {
     javacOptions {
         // Increase the max count of errors from annotation processors.
@@ -126,10 +125,12 @@ dependencyCheck {
     scanConfigurations = listOf(
         "prodSecureRestrictedReleaseCompileClasspath", "prodSecureRestrictedReleaseRuntimeClasspath"
     )
-    analyzers(closureOf<org.owasp.dependencycheck.gradle.extension.AnalyzerExtension> {
-        assemblyEnabled = false
-        nodeAuditEnabled = false
-    })
+    analyzers(
+        closureOf<org.owasp.dependencycheck.gradle.extension.AnalyzerExtension> {
+            assemblyEnabled = false
+            nodeAuditEnabled = false
+        }
+    )
     format = org.owasp.dependencycheck.reporting.ReportGenerator.Format.ALL
     suppressionFile = "${project.projectDir}/dependency-check-suppressions.xml"
     outputDirectory = "${project.buildDir}/reports/owasp-dependency-check"

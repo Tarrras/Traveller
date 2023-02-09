@@ -75,7 +75,6 @@ private fun DrawScope.drawStrengthProgressRect(
     )
 }
 
-
 data class PasswordStrengthMeterColors(
     val backgroundColor: Color = Color.Gray.copy(alpha = 0.1f),
     val weakStrengthBackgroundColor: Color = Color(0xFFFB0066),
@@ -85,7 +84,6 @@ data class PasswordStrengthMeterColors(
 )
 
 fun defaultMeterColors() = PasswordStrengthMeterColors()
-
 
 @Preview
 @Composable

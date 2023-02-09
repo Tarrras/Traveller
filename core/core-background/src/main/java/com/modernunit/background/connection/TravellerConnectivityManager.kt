@@ -15,7 +15,11 @@ class TravellerConnectivityManager : ConnectivityManager.NetworkCallback() {
     val networkEvents = mutableNetworkEvents.asSharedFlow()
 
     fun setAvailabilityState(isAvailable: Boolean) {
-        mutableNetworkEvents.tryEmit(if (isAvailable) NetworkState.UNAVAILABLE else NetworkState.UNAVAILABLE)
+        mutableNetworkEvents.tryEmit(
+            if (isAvailable)
+                NetworkState.UNAVAILABLE
+            else NetworkState.UNAVAILABLE
+        )
     }
 
     override fun onAvailable(network: Network) {

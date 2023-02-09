@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class AuthenticationRepository @Inject constructor(
     private val authenticationNetworkDataSource: IAuthenticationNetworkDataSource,
-    //private val ioDispatcher: CoroutineDispatcher, todo inject dispatcher
+    // private val ioDispatcher: CoroutineDispatcher, todo inject dispatcher
 ) : IAuthenticationRepository {
     override suspend fun logIn(email: String, password: String): Boolean {
         return withContext(Dispatchers.IO) {

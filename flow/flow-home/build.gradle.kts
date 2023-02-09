@@ -11,7 +11,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:core-ui")) //todo remove it later
+    implementation(project(":core:core-ui")) // todo remove it later
     implementation(project(":core:core-testing"))
 
     implementation(libs.androidx.navigation.compose)

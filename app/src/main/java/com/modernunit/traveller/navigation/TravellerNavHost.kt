@@ -30,7 +30,10 @@ fun TravellerNavHost(
                 TopNavDestination.MainGraph
             )
         })
-        authenticationGraph(navController = navController, route = TopNavDestination.LoginGraph.destination)
+        authenticationGraph(
+            navController = navController,
+            route = TopNavDestination.LoginGraph.destination
+        )
         mainGraph(route = TopNavDestination.MainGraph.destination)
     }
 }

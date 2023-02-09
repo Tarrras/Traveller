@@ -10,24 +10,12 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             with(pluginManager) {
                 apply("com.android.library")
                 apply("org.jetbrains.kotlin.android")
-                apply("org.jlleitschuh.gradle.ktlint")
             }
 
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
                 defaultConfig.targetSdk = 32
             }
-
-/*            val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
-            dependencies {
-                configurations.configureEach {
-                    resolutionStrategy {
-                        force(libs.findLibrary("junit4").get())
-                        // Temporary workaround for https://issuetracker.google.com/174733673
-                        force("org.objenesis:objenesis:2.6")
-                    }
-                }
-            }*/
         }
     }
 
