@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!--todo add support for dark theme-->
-    <style name="Theme.Traveller" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.Traveller" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">
             @drawable/transparent_image

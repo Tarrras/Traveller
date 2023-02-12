@@ -61,11 +61,9 @@ dependencies {
     implementation(project(":core:core-testing"))
 
     implementation(libs.androidx.activity.ktx)
-    implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.navigation.compose)
 
     implementation(libs.androidx.appcompat)
-    implementation(libs.com.google.android.material)
 
     implementation(libs.org.jetbrains.kotlin.stdlib.jdk8)
     implementation(libs.org.jetbrains.kotlin.reflect)

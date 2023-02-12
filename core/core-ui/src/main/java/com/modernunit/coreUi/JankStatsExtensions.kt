@@ -29,28 +29,28 @@ import androidx.metrics.performance.PerformanceMetricsState
 import kotlinx.coroutines.CoroutineScope
 
 /**
- * Retrieves [PerformanceMetricsState.MetricsStateHolder] from current [LocalView] and
+ * Retrieves [PerformanceMetricsState.Holder] from current [LocalView] and
  * remembers it until the View changes.
- * @see PerformanceMetricsState.getForHierarchy
+ * @see PerformanceMetricsState.getHolderForHierarchy
  */
 @Composable
-fun rememberMetricsStateHolder(): PerformanceMetricsState.MetricsStateHolder {
+fun rememberMetricsStateHolder(): PerformanceMetricsState.Holder {
     val localView = LocalView.current
 
     return remember(localView) {
-        PerformanceMetricsState.getForHierarchy(localView)
+        PerformanceMetricsState.getHolderForHierarchy(localView)
     }
 }
 
 /**
  * Convenience function to work with [PerformanceMetricsState] state. The side effect is
  * re-launched if any of the [keys] value is not equal to the previous composition.
- * @see JankMetricDisposableEffect if you need to work with DisposableEffect to cleanup added state.
+ * @see TrackDisposableJank if you need to work with DisposableEffect to cleanup added state.
  */
 @Composable
-fun JankMetricEffect(
+fun TrackJank(
     vararg keys: Any?,
-    reportMetric: suspend CoroutineScope.(state: PerformanceMetricsState.MetricsStateHolder) -> Unit
+    reportMetric: suspend CoroutineScope.(state: PerformanceMetricsState.Holder) -> Unit,
 ) {
     val metrics = rememberMetricsStateHolder()
     LaunchedEffect(metrics, *keys) {
@@ -63,9 +63,9 @@ fun JankMetricEffect(
  * The side effect is re-launched if any of the [keys] value is not equal to the previous composition.
  */
 @Composable
-fun JankMetricDisposableEffect(
+fun TrackDisposableJank(
     vararg keys: Any?,
-    reportMetric: DisposableEffectScope.(state: PerformanceMetricsState.MetricsStateHolder) -> DisposableEffectResult
+    reportMetric: DisposableEffectScope.(state: PerformanceMetricsState.Holder) -> DisposableEffectResult,
 ) {
     val metrics = rememberMetricsStateHolder()
     DisposableEffect(metrics, *keys) {
@@ -73,13 +73,16 @@ fun JankMetricDisposableEffect(
     }
 }
 
+/**
+ * Track jank while scrolling anything that's scrollable.
+ */
 @Composable
 fun TrackScrollJank(scrollableState: ScrollableState, stateName: String) {
-    JankMetricEffect(scrollableState) { metricsHolder: PerformanceMetricsState.MetricsStateHolder ->
+    TrackJank(scrollableState) { metricsHolder ->
         snapshotFlow { scrollableState.isScrollInProgress }.collect { isScrollInProgress ->
             metricsHolder.state?.apply {
                 if (isScrollInProgress) {
-                    addState(stateName, "Scrolling=true")
+                    putState(stateName, "Scrolling=true")
                 } else {
                     removeState(stateName)
                 }
