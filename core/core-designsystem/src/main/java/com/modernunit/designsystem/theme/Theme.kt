@@ -1,7 +1,7 @@
 package com.modernunit.designsystem.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 
@@ -13,7 +13,7 @@ fun TravellerTheme(
     val extendedColors = if (darkTheme) DarkExtendedColors else LightExtendedColors
     CompositionLocalProvider(LocalExtendedColors provides extendedColors) {
         MaterialTheme(
-            colors = getThemeColors(darkTheme),
+            colorScheme = getThemeColors(darkTheme),
             typography = Typography,
             shapes = Shapes,
             content = content
