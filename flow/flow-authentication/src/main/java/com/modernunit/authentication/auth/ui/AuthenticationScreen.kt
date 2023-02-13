@@ -37,12 +37,12 @@ import com.modernunit.authentication.auth.AuthenticationScreenState
 import com.modernunit.authentication.auth.EmptyAuthenticationScreenState
 import com.modernunit.authentication.auth.TravellerInputPasswordField
 import com.modernunit.authentication.auth.validator.toValidationTextResult
-import com.modernunit.designsystem.base.BackButton
-import com.modernunit.designsystem.base.ConnectionLostCard
-import com.modernunit.designsystem.base.FeatureIsNotAvailableMessage
-import com.modernunit.designsystem.base.SocialButtonsGroup
-import com.modernunit.designsystem.base.TravellerButton
-import com.modernunit.designsystem.base.TravellerInputTextField
+import com.modernunit.designsystem.components.BackButton
+import com.modernunit.designsystem.components.ConnectionLostCard
+import com.modernunit.designsystem.components.FeatureIsNotAvailableMessage
+import com.modernunit.designsystem.components.GoogleAuthButton
+import com.modernunit.designsystem.components.TravellerGradientButton
+import com.modernunit.designsystem.components.TravellerInputTextField
 import com.modernunit.designsystem.extensions.AnnotatedClickableText
 import com.modernunit.designsystem.extensions.shimmer
 import com.modernunit.designsystem.theme.TravellerTheme
@@ -55,7 +55,7 @@ fun AuthenticationScreen(
 ) = Box(
     modifier = Modifier
         .fillMaxSize()
-        .background(TravellerTheme.colors.backgroundGrey)
+        .background(TravellerTheme.colors.neutralGrey)
         .navigationBarsPadding()
         .imePadding()
         .statusBarsPadding(),
@@ -106,10 +106,9 @@ fun AuthenticationScreenContent(
         style = MaterialTheme.typography.h1
     )
     Spacer(modifier = Modifier.height(20.dp))
-    SocialButtonsGroup(
+    GoogleAuthButton(
         modifier = Modifier.fillMaxWidth(),
         onGoogleClicked = { handleEvent(AuthenticationScreenEvent.AuthenticateWithGoogle) },
-        onFacebookClicked = { handleEvent(AuthenticationScreenEvent.AuthenticateWithFacebook) }
     )
     Spacer(modifier = Modifier.height(32.dp))
     Text(
@@ -160,7 +159,7 @@ fun AuthenticationScreenContent(
         )
     }
     Spacer(modifier = Modifier.weight(1f))
-    TravellerButton(
+    TravellerGradientButton(
         onClick = {
             handleEvent(AuthenticationScreenEvent.Authenticate)
         },

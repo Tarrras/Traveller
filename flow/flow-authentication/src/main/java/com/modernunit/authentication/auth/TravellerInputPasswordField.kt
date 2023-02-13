@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.modernunit.authentication.R
 import com.modernunit.authentication.auth.passwordStrengthMeter.PasswordStrengthMeter
 import com.modernunit.authentication.auth.validator.PasswordRequirement
-import com.modernunit.designsystem.base.TravellerInputTextField
+import com.modernunit.designsystem.components.TravellerInputTextField
 import com.modernunit.designsystem.theme.TravellerTheme
 import kotlinx.collections.immutable.ImmutableList
 
@@ -44,7 +44,7 @@ fun TravellerInputPasswordField(
     val passwordIconTint by animateColorAsState(
         targetValue = if (isTextVisible) {
             MaterialTheme.colors.primary
-        } else TravellerTheme.colors.extendedGrey.copy(alpha = 1f)
+        } else TravellerTheme.colors.neutralGrey.copy(alpha = 1f)
     )
     val visualTransformation = remember(isTextVisible) {
         if (isTextVisible) VisualTransformation.None

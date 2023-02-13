@@ -35,7 +35,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.modernunit.authentication.R
-import com.modernunit.designsystem.base.TravellerButton
+import com.modernunit.designsystem.components.TravellerGradientButton
 import com.modernunit.designsystem.theme.TravellerTheme
 
 @Composable
@@ -90,7 +90,7 @@ fun WelcomeScreen(
                 textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.weight(1f))
-            TravellerButton(
+            TravellerGradientButton(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 32.dp),

@@ -1,4 +1,4 @@
-package com.modernunit.designsystem.base
+package com.modernunit.designsystem.components
 
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon

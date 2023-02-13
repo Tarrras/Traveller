@@ -1,4 +1,4 @@
-package com.modernunit.designsystem.base
+package com.modernunit.designsystem.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutLinearInEasing

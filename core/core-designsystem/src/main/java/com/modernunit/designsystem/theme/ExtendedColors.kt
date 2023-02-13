@@ -6,32 +6,27 @@ import androidx.compose.ui.graphics.Color
 
 @Immutable
 data class ExtendedColors(
-    val facebookBlue: Color,
-    val extendedGrey: Color,
-    val backgroundGrey: Color,
+    val neutralGrey: Color,
+    val semitransparent: Color,
 )
 
 val LightExtendedColors by lazy {
     ExtendedColors(
-        facebookBlue = Color(0xFF3498DB),
-        extendedGrey = Color(0xFFC0C0C0),
-        backgroundGrey = Color(0xFFF2F2F2)
+        neutralGrey = Color(0xFFECF0F5),
+        semitransparent = Color(0x66140F26)
     )
 }
 
-// todo update for dark theme
 val DarkExtendedColors by lazy {
     ExtendedColors(
-        facebookBlue = Color(0xFF3498DB),
-        extendedGrey = Color(0xFFC0C0C0),
-        backgroundGrey = Color(0xFFF2F2F2)
+        neutralGrey = Color(0xFFECF0F5),
+        semitransparent = Color(0x66140F26)
     )
 }
 
 val LocalExtendedColors = staticCompositionLocalOf {
     ExtendedColors(
-        facebookBlue = Color.Unspecified,
-        extendedGrey = Color.Unspecified,
-        backgroundGrey = Color.Unspecified
+        neutralGrey = Color.Unspecified,
+        semitransparent = Color.Unspecified
     )
 }

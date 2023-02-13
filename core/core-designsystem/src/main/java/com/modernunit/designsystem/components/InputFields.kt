@@ -1,4 +1,4 @@
-package com.modernunit.designsystem.base
+package com.modernunit.designsystem.components
 
 import android.content.res.Configuration
 import androidx.compose.animation.animateContentSize

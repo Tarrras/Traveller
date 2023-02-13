@@ -29,8 +29,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.ui.Scaffold
 import com.modernunit.authentication.R
 import com.modernunit.background.connection.NetworkState
-import com.modernunit.designsystem.base.ConnectionLostCard
-import com.modernunit.designsystem.base.TravellerButton
+import com.modernunit.designsystem.components.ConnectionLostCard
+import com.modernunit.designsystem.components.TravellerGradientButton
 import com.modernunit.designsystem.theme.TravellerTheme
 
 @Composable
@@ -91,20 +91,18 @@ fun IntroScreenContent(
         textAlign = TextAlign.Center
     )
     Spacer(modifier = Modifier.weight(1f))
-    TravellerButton(
+    TravellerGradientButton(
         onClick = onLogIn,
         text = stringResource(id = R.string.log_in),
         modifier = Modifier
             .fillMaxWidth()
     )
     Spacer(modifier = Modifier.height(16.dp))
-    TravellerButton(
+    TravellerGradientButton(
         modifier = Modifier
             .fillMaxWidth(),
         onClick = onSignUp,
         text = stringResource(id = R.string.create_an_account),
-        backgroundColor = Color.White, // todo add support for dark theme
-        contentColor = Color.Black // todo add support for dark theme
     )
     Spacer(modifier = Modifier.height(32.dp))
 }

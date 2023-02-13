@@ -10,7 +10,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.modernunit.authentication.auth.InputPasswordFieldTestTag
 import com.modernunit.authentication.auth.PasswordEyeTestTag
 import com.modernunit.authentication.auth.TravellerInputPasswordField
-import com.modernunit.designsystem.base.InputFieldTestTag
+import com.modernunit.designsystem.components.InputFieldTestTag
 import kotlinx.collections.immutable.persistentListOf
 import org.junit.Assert
 import org.junit.Rule
